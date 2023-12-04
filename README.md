@@ -1,5 +1,4 @@
 # Concept-Diffusion
-Official Implementation for "Semantic Guidance Tuning for Text-To-Image Diffusion Models"
 
 > Hyun Kang, Dohae Lee, Myungjin Shin, In-Kwon Lee
 > 
@@ -9,3 +8,42 @@ Official Implementation for "Semantic Guidance Tuning for Text-To-Image Diffusio
 
 <a href="https://arxiv.org/0000.00000"><img src="https://img.shields.io/badge/arXiv-2301.13826-b31b1b.svg" height=20.5></a>
 <a href="https://conceptdiffusion.github.io/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=red" height=20.5></a> 
+
+<p align="center">
+<img src="samples/teaser.png" width="800px"/>  
+</p>
+
+## Description
+This is the official codebase for **Semantic Guidance Tuning for Text-To-Image Diffusion Models**.
+
+## Setup
+### Environment
+Following lines setup an environment
+```
+conda create -n concept_diff --file python=3.9
+conda activate concept_diff
+```
+To install required packages,
+```
+pip install -r requirements.txt
+```
+
+## Usage
+To generate an image, you can simply run the `run.py` script with following arguments
+```
+python -m run <prompt> <subjects> --seed <seed>
+```
+- _prompt_ (str): prompt text to generate an image e.g., "a red book and a brown dog".
+- _subjects_ (str): subjects in the prompt separated by comma (,) e.g., "a red book, a brown dog"
+- _seed_ (int \*optional\*): random seed to generate latent noise e.g., "20231204"
+
+Hyperparameters for Concept Diffusion is stored in `configs/default.yaml`
+- _concept_guidance_scale_ (float): guidance scale for concept guidance term
+- _threshold_\[subject|abstract\]_ (float or "auto"): threshold cosine similarity between main score and concept score for applying concept guidance.
+- _upper_bound_ (float): upperbound threshold similarity between main score and concept score for applying concept guidance.  
+
+## Acknowledgement
+This code is built upon [diffusers](https://github.com/huggingface/diffusers) and [Perp-Neg](https://github.com/Perp-Neg/Perp-Neg-stablediffusion).
+
+## Citation
+If you use this code for your research, please cite the following work: 
