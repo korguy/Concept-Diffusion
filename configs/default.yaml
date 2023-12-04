@@ -1,0 +1,15 @@
+method: concept_diffusion
+version: CompVis/stable-diffusion-v1-4
+scheduler: pndm
+params:
+  height: 512
+  width: 512
+  num_inference_steps: 50
+  guidance_scale: 7.5
+  concept_guidance_scale: 7.5
+  warm_up_steps: 0
+  cool_down_steps: 50
+  threshold_subject: auto # [0,1] or 'auto'
+  threshold_abstract: 0.7 # [0,1] or 'auto'
+  upper_bound: 0.8
+  window_size: 1
