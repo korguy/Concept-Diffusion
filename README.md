@@ -21,7 +21,7 @@ Baseline models' default configurations are in "configs/models" file
 Configure experiment file (.yaml) to run multiple models all at once
 
 ```
-python -m run configs/exp/examp.yaml
+python -m run configs/exp/example.yaml
 ```
 
 ## Evaluation
