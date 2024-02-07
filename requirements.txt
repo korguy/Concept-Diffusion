@@ -1,10 +1,2 @@
-diffusers==0.15.0
-torch==2.0.1
-transformers==4.30.2
-tqdm
-PyYAML
-Pillow
-ftfy
-opencv-python
-ninja
-matplotlib
+diffusers==0.16.1
+

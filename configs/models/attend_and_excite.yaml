@@ -1,0 +1,23 @@
+name: attend_and_excite
+model: attend_and_excite
+version: runwayml/stable-diffusion-v1-5
+scheduler: ddim
+params:
+  height: 512
+  width: 512
+  num_inference_steps: 50
+  guidance_scale: 7.5
+  eta: 0.0
+  guidance_rescale: 0.0
+  return_dict: True
+  output_type: pil
+  attention_res: 16
+  max_iter_to_alter: 25
+  sigma: 0.5
+  kernel_size: 3
+  smooth_attentions: True
+  thresholds:
+    0: 0.05
+    10: 0.5
+    20: 0.8
+  scale_factor: 20

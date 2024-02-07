@@ -1,2 +1,6 @@
 run/
 sftp-config.json
+__pycache__
+*.ipynb
+*.png
+data/

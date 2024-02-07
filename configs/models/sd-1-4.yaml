@@ -1,0 +1,15 @@
+name: stable_diffusion_1_4
+model: stable_diffusion
+version: CompVis/stable-diffusion-v1-4
+scheduler: ddim
+params:
+  height: 512
+  width: 512
+  num_inference_steps: 50
+  guidance_scale: 7.5
+  timesteps: 50
+  eta: 0.0
+  guidance_rescale: 0.0
+  return_dict: True
+  output_type: pil
+  

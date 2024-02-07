@@ -1,0 +1,9 @@
+name: stable_diffusion_2-1
+version: stabilityai/stable-diffusion-2-1
+scheduler: ddim
+params:
+  height: 512
+  width: 512
+  num_inference_steps: 50
+  guidance_scale: 7.5
+  

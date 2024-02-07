@@ -1,4 +1,33 @@
-# Concept-Diffusion
+# Repository for Diffusion Project
+> Hyun Kang, Dohae Lee, Myungjin Shin, In-Kwon Lee
+
+## Implemented Baseline Models
+```
+{
+	'stable_diffusion': StableDiffusionPipeline,
+	'composable_diffusion': ComposableStableDiffusionPipeline,
+	'structure_diffusion': StructureDiffusionPipeline,
+	'attend_and_excite': AttendAndExcitePipeline,
+	'syntax_guided_generation': SynGenDiffusionPipeline,
+}
+```
+
+## Dataset
+Dataset should be in '.csv' format in which "prompt" column contains target prompts
+
+## Experiments
+Baseline models' default configurations are in "configs/models" file
+
+Configure experiment file (.yaml) to run multiple models all at once
+
+```
+python -m run configs/exp/examp.yaml
+```
+
+## Evaluation
+
+자동으로 계산 가능한 코드 작성 부탁..
+<!-- # Concept-Diffusion
 
 > Hyun Kang, Dohae Lee, Myungjin Shin, In-Kwon Lee
 > 
@@ -47,3 +76,4 @@ This code is built upon [diffusers](https://github.com/huggingface/diffusers) an
 
 ## Citation
 If you use this code for your research, please cite the following work: 
+ -->
