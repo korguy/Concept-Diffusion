@@ -42,7 +42,7 @@ def generate(baselines, seeds, dataset, out_dir):
 							except:
 								continue
 
-					__out_dir = f"{_out_dir}/{prompt[:50]}"
+					__out_dir = f"{_out_dir}/{idx}_{prompt[:50]}"
 					os.makedirs(__out_dir, exist_ok=True)
 
 					for seed in seeds:
