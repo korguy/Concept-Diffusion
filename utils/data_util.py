@@ -5,7 +5,10 @@ import numpy as np
 from diffusers import LMSDiscreteScheduler, DDIMScheduler, PNDMScheduler, DDPMScheduler
 
 def load_data(path, method):
-	data = pd.read_csv(path)
+	try:
+		data = pd.read_csv(path)
+	except pd.errors.ParserError:
+		data = pd.read_csv(path, delimiter="|")
 	if method == "stable_diffusion" or method == "structure_diffusion" or method == "syntax_guided_generation":
 		return data["prompt"]
 	elif method == "composable_diffusion":
