@@ -36,7 +36,7 @@ class Metric(ABC):
         	self.images = sorted(list(glob(f'{self.root_dir}/*/*.png')))
     
         # Load data
-        self.data = load_data(dataset, model)
+        self.prompts = load_data(dataset, model, return_raw_prompts=True)
     
         # Load results.yaml
         self.results_yaml_path = Path(out_dir, results_yaml_name + ".yaml")

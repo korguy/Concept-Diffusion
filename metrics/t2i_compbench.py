@@ -48,7 +48,7 @@ class T2ICompBenchScore(Metric):
     def __prepare_images(self):
         for iimg, img in enumerate(tqdm(self.images, desc="Preparing images for T2ICB")):
             prompt_idx = int(re.match(r"^(\d+)_.+$", Path(img).parent.name).group(1))
-            caption = self.data[prompt_idx] if self.model != 'attend_and_excite' else self.data[0][prompt_idx]
+            caption = self.prompts[prompt_idx]
 
             target_fn = "{}_{:06}{}".format(caption, iimg, osp.splitext(img)[1])
             target_fp = osp.join(self.__samples_dir, target_fn)

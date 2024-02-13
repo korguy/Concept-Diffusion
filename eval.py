@@ -60,7 +60,8 @@ for imeth, meth in enumerate(methods):
             config = yaml.safe_load(f)
         dataset = config['dataset']
         baselines = config['baselines']
-        for baseline in tqdm(baselines, desc="Baselines"):
+        for ibl, baseline in enumerate(baselines):
+            print("\t\tBaseline [{}/{}]: '{}'\n".format(ibl+1, len(baselines), baseline))
             with open(baseline) as f:
                 bl_config = yaml.safe_load(f)
             meth_init_d = {

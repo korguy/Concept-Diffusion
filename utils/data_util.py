@@ -4,12 +4,12 @@ import numpy as np
 
 from diffusers import LMSDiscreteScheduler, DDIMScheduler, PNDMScheduler, DDPMScheduler
 
-def load_data(path, method):
+def load_data(path, method, return_raw_prompts=False):
 	try:
 		data = pd.read_csv(path)
 	except pd.errors.ParserError:
 		data = pd.read_csv(path, delimiter="|")
-	if method == "stable_diffusion" or method == "structure_diffusion" or method == "syntax_guided_generation":
+	if return_raw_prompts or method == "stable_diffusion" or method == "structure_diffusion" or method == "syntax_guided_generation":
 		return data["prompt"]
 	elif method == "composable_diffusion":
 		prompts = []
