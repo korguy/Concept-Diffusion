@@ -18,6 +18,7 @@ ap.add_argument('--config', help="May be a single file, e.g., ./configs/exp/exam
         "or a directory in which case all .yaml files within it (recursive) will be evaluated.")
 ap.add_argument('--methods', '-m', nargs='+',
         choices=['fid', 'blip-vqa', 'clipscore', 'unidet'])
+ap.add_argument('--debug', action='store_true')
 ap.add_argument('--run_dir')
 ap.add_argument('--out_dir')
 ap.add_argument('--seed')
@@ -83,6 +84,9 @@ for imeth, meth in enumerate(methods):
                 t2icb_init_d['t2icompbench_proj_dir'] = t2i_compbench_dir
                 t2icb_init_d['t2icompbench_python_exe'] = t2i_compbench_pyexe
                 evaluator = T2ICompBenchScore(**t2icb_init_d)
+
+            if args.debug:
+                evaluator.delete_temp_dir_on_exit = False
 
             with evaluator:
                 scores = evaluator.write_scores()

@@ -25,9 +25,10 @@ class Metric(ABC):
             raise ValueError("Invalid root directory: '{}'".format(self.root_dir))
         if not osp.isdir(out_dir):
             raise ValueError("Invalid out_dir: '{}'".format(out_dir))
-    
+
         self.__uid = "".join([str(random.randint(0, 9)) for _ in range(10)])
-        
+        self.delete_temp_dir_on_exit = True
+
         # Images
         if seed is not None:
         	self.images = sorted(list(glob(f'{self.root_dir}/*/{seed}.png')))
@@ -82,5 +83,5 @@ class Metric(ABC):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if osp.isdir(self.get_temp_dir()):
+        if self.delete_temp_dir_on_exit and osp.isdir(self.get_temp_dir()):
             shutil.rmtree(self.get_temp_dir())

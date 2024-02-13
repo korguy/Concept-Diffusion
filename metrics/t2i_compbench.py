@@ -37,11 +37,11 @@ class T2ICompBenchScore(Metric):
         self.__img_og_paths = dict()
         self.__t2i_data_dir = Path(temp_dir, "data")
         self.__t2i_data_dir.mkdir()
-        self.__samples_dir = Path(temp_dir, "data/samples")
+        self.__samples_dir = Path(self.__t2i_data_dir, "samples")
         self.__samples_dir.mkdir()
         self.__prepare_images()
 
-        self.__results_basedir = Path(self.root_dir, "t2icompbench_results", self.name, score_method, now_fmt())
+        self.__results_basedir = Path(self.out_dir, "t2icompbench_results", self.name, score_method, now_fmt())
         self.__results_basedir.mkdir(parents=True, exist_ok=True)
         print("Results will be saved to '{}'.".format(self.__results_basedir))
 
@@ -163,7 +163,7 @@ class T2ICompBenchScore(Metric):
         cnt = 0
         for r in vqa_result:
             score_cur = float(r['answer'])
-            if score >= 0:
+            if score_cur >= 0:
                 score_sum += score_cur
                 cnt += 1
 
