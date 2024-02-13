@@ -1,0 +1,9 @@
+name: ours
+model: ours
+version: runwayml/stable-diffusion-v1-5
+scheduler: ddim
+params:
+  height: 512
+  width: 512
+  num_inference_steps: 50
+  guidance_scale: 7.5
