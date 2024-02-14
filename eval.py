@@ -74,23 +74,38 @@ for imeth, meth in enumerate(methods):
             if args.seed: meth_init_d['seed'] = args.seed
             if args.results_yaml_name: meth_init_d['results_yaml_name'] = args.results_yaml_name
 
-            if meth == 'fid':
-                fid_init_d = {**meth_init_d}
-                if args.fid_ref_images_dir:
-                    fid_init_d['ref_images_dir'] = args.fid_ref_images_dir
-                evaluator = FidScore(**fid_init_d)
-            elif meth in ('blip-vqa', 'clipscore', 'unidet'):
-                t2icb_init_d = {**meth_init_d}
-                t2icb_init_d['score_method'] = meth
-                t2icb_init_d['t2icompbench_proj_dir'] = t2i_compbench_dir
-                t2icb_init_d['t2icompbench_python_exe'] = t2i_compbench_pyexe
-                evaluator = T2ICompBenchScore(**t2icb_init_d)
+            evaluator = None
+            try:
+                if meth == 'fid':
+                    fid_init_d = {**meth_init_d}
+                    if args.fid_ref_images_dir:
+                        fid_init_d['ref_images_dir'] = args.fid_ref_images_dir
+                    evaluator = FidScore(**fid_init_d)
+                elif meth in ('blip-vqa', 'clipscore', 'unidet'):
+                    t2icb_init_d = {**meth_init_d}
+                    t2icb_init_d['score_method'] = meth
+                    t2icb_init_d['t2icompbench_proj_dir'] = t2i_compbench_dir
+                    t2icb_init_d['t2icompbench_python_exe'] = t2i_compbench_pyexe
+                    evaluator = T2ICompBenchScore(**t2icb_init_d)
+                else:
+                    print("Unknown method: '{}'".format(meth))
+            except:
+                traceback.print_exc()
+                print("Failed to create evaluator.")
 
-            if args.debug:
-                evaluator.delete_temp_dir_on_exit = False
+            if evaluator is not None:
+                if args.debug:
+                    evaluator.delete_temp_dir_on_exit = False
 
-            with evaluator:
-                scores = evaluator.write_scores()
-            print("\t\tScores: {}".format(scores))
-            print()
+                scores = None
+                with evaluator:
+                    try:
+                        scores = evaluator.write_scores()
+                    except:
+                        traceback.print_exc()
+                        print("Failed to compute scores.")
+
+                if scores is not None:
+                    print("\t\tScores: {}".format(scores))
+                print()
 
