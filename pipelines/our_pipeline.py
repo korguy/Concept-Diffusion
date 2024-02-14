@@ -1,10 +1,15 @@
 from typing import Any, Callable, Dict, List, Optional, Union
 
 import torch
+import warnings
+warnings.filterwarnings("ignore")
 
 from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import StableDiffusionPipeline
 
+def get_perpendicular_component(x, y):
+	assert x.shape == y.shape
+	return x - ((torch.mul(x, y).sum())/(torch.norm(y)**2)) * y
 
 class OurPipeline(StableDiffusionPipeline):
 	def _encode_prompt(
@@ -174,7 +179,7 @@ class OurPipeline(StableDiffusionPipeline):
 			negative_prompt,
 			prompt_embeds=prompt_embeds,
 			negative_prompt_embeds=negative_prompt_embeds,
-		)
+		) # prompt_embeds: [N, 77, 768]
 
 		self.tokens = tokens
 
@@ -193,24 +198,44 @@ class OurPipeline(StableDiffusionPipeline):
 			latents,
 		)
 
+		# latents = torch.cat([latents] * len(prompt))
+
 		extra_step_kwargs = self.prepare_extra_step_kwargs(generator, eta)
 		num_warmup_steps = len(timesteps) - num_inference_steps * self.scheduler.order
 		with self.progress_bar(total=num_inference_steps) as progress_bar:
 			for i, t in enumerate(timesteps):
-				latent_model_input = torch.cat([latents] * 2) if do_classifier_free_guidance else latents
+				# latent_model_input = torch.cat([latents] * 2) if do_classifier_free_guidance else latents
+				latent_model_input = latents
 				latent_model_input = self.scheduler.scale_model_input(latent_model_input, t)
 
-				noise_pred = self.unet(
-					latent_model_input,
-					t,
-					encoder_hidden_states=prompt_embeds,
-					cross_attention_kwargs=cross_attention_kwargs,
-					return_dict=False
-				)[0]
+				noise_pred = []
+				for i in range(len(prompt)):
+					_noise_pred = self.unet(
+						latent_model_input,
+						t,
+						encoder_hidden_states=prompt_embeds[i].unsqueeze(0),
+						cross_attention_kwargs=cross_attention_kwargs,
+						return_dict=False
+					)[0]
+					noise_pred.append(_noise_pred)
+				noise_pred = torch.cat(noise_pred, dim=0)
 
 				if do_classifier_free_guidance:
-					noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
+					noise_pred_uncond, noise_pred_text = noise_pred[:1], noise_pred[1][None]
+					noise_pred_concepts = noise_pred[2:]
+
+					prompt_score = (noise_pred_text-noise_pred_uncond)
+					subject_scores = (noise_pred_concepts - noise_pred_uncond)
+					abstract_score = get_perpendicular_component(prompt_score[0], torch.sum(subject_scores, dim=0))[None]
+					concept_scores = torch.cat([subject_scores, abstract_score], dim=0)
+
+					sim = torch.abs(torch.nn.functional.cosine_similarity(
+	                    prompt_score.reshape(1, -1), concept_scores.reshape(len(prompt)-1, -1)
+	                ))
+					print(sim)
+
 					noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_text - noise_pred_uncond)
+					noise_pred = noise_pred_uncond + guidance_scale * (concept_scores[2][None])
 
 				latents = self.scheduler.step(noise_pred, t, latents, **extra_step_kwargs).prev_sample
 				
@@ -255,6 +280,7 @@ if __name__ == "__main__":
 
 	from utils.util import *
 	from utils.ptp_util import AttentionStore
+	from utils.vis_util import visualize_cross_attention_map
 
 	config = yaml.safe_load(open("configs/models/ours.yaml",'r'))
 
@@ -267,5 +293,13 @@ if __name__ == "__main__":
 	prompt = "a green backpack and a brown suitcase"
 	noun_phrases = ["a green backpack", "a brown suitcase"]
 
-	img = model(prompt, noun_phrases, **config["params"]).images[0]
+	seed = 42
+	g = torch.Generator("cuda").manual_seed(seed)
+
+	img = model(prompt, noun_phrases, generator=g, **config["params"]).images[0]
 	img.save('tmp.png')
+	# visualize_cross_attention_map(attention_store, 
+	# 	img, 
+	# 	model.tokens, 
+	# 	**config["vis_option"],
+	# 	out="tmp2.png")

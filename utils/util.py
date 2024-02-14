@@ -28,15 +28,16 @@ class CustomAttnProcessor:
 		value = attn.head_to_batch_dim(value)
 
 		attention_probs = attn.get_attention_scores(query, key, attention_mask)
+		self.attnstore(attention_probs, False, self.place_in_unet)
 		hidden_states = torch.bmm(attention_probs, value)
 		hidden_states = attn.batch_to_head_dim(hidden_states)
 
 		return hidden_states
 
 	def cross_attention(self, attn, hidden_states, encoder_hidden_states, attention_mask):
-		encoder_hidden_states = torch.cat([encoder_hidden_states[0].unsqueeze(0),
-												encoder_hidden_states[-1].unsqueeze(0)
-												], dim=0)
+		# encoder_hidden_states = torch.cat([encoder_hidden_states[0].unsqueeze(0),
+												# encoder_hidden_states[-1].unsqueeze(0)
+												# ], dim=0)
 
 		query = attn.to_q(hidden_states)
 		key = attn.to_k(encoder_hidden_states)
@@ -47,6 +48,7 @@ class CustomAttnProcessor:
 		value = attn.head_to_batch_dim(value)
 
 		attention_probs = attn.get_attention_scores(query, key, attention_mask)
+		self.attnstore(attention_probs, True, self.place_in_unet)
 		hidden_states = torch.bmm(attention_probs, value)
 		hidden_states = attn.batch_to_head_dim(hidden_states)
 

@@ -7,3 +7,14 @@ params:
   width: 512
   num_inference_steps: 50
   guidance_scale: 7.5
+
+vis_option:
+  down:
+    level: [0]
+    head: 0
+  mid:
+    level: [0]
+    head: 0
+  up:
+    level: [0]
+    head: 0
