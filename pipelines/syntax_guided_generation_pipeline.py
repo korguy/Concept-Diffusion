@@ -7,10 +7,16 @@ from diffusers import StableDiffusionPipeline, AutoencoderKL, UNet2DConditionMod
 from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput, StableDiffusionSafetyChecker
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import (
     EXAMPLE_DOC_STRING)
-from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_attend_and_excite import (
-    AttentionStore,
-    AttendExciteAttnProcessor
-)
+try:
+    from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_attend_and_excite import (
+        AttentionStore,
+        AttendExciteAttnProcessor
+    )
+except ImportError:  # Newer diffusers versions
+    from diffusers.pipelines.stable_diffusion_attend_and_excite.pipeline_stable_diffusion_attend_and_excite import (
+        AttentionStore,
+        AttendExciteAttnProcessor
+    )
 import numpy as np
 from diffusers.schedulers import KarrasDiffusionSchedulers
 from diffusers.utils import (
@@ -19,7 +25,10 @@ from diffusers.utils import (
 )
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer
 
-from utils.syngen_util import get_attention_map_index_to_wordpiece, split_indices, calculate_positive_loss, calculate_negative_loss, get_indices, start_token, end_token, align_wordpieces_indices, extract_attribution_indices, extract_attribution_indices_with_verbs, extract_attribution_indices_with_verb_root, extract_entities_only
+try:
+    from utils.syngen_util import get_attention_map_index_to_wordpiece, split_indices, calculate_positive_loss, calculate_negative_loss, get_indices, start_token, end_token, align_wordpieces_indices, extract_attribution_indices, extract_attribution_indices_with_verbs, extract_attribution_indices_with_verb_root, extract_entities_only
+except ImportError:  # for comfyui
+    from ..utils.syngen_util import get_attention_map_index_to_wordpiece, split_indices, calculate_positive_loss, calculate_negative_loss, get_indices, start_token, end_token, align_wordpieces_indices, extract_attribution_indices, extract_attribution_indices_with_verbs, extract_attribution_indices_with_verb_root, extract_entities_only
 
 
 logger = logging.get_logger(__name__)
