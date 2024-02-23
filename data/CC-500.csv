@@ -1,0 +1,637 @@
+,Unnamed: 0,prompt,noun_phrases,nouns
+0,0,a green bench and a red car,a green bench;a red car,bench;car
+1,1,a red bench and a green car,a red bench;a green car,bench;car
+2,2,a green bench and a blue car,a green bench;a blue car,bench;car
+3,3,a blue bench and a green car,a blue bench;a green car,bench;car
+4,4,a red car and a gold clock,a red car;a gold clock,car;clock
+5,5,a gold car and a red clock,a gold car;a red clock,car;clock
+6,6,a red car and a brown clock,a red car;a brown clock,car;clock
+7,7,a brown car and a red clock,a brown car;a red clock,car;clock
+8,8,a red car and a brown elephant,a red car;a brown elephant,car;elephant
+9,9,a brown car and a red elephant,a brown car;a red elephant,car;elephant
+10,10,a red car and a pink elephant,a red car;a pink elephant,car;elephant
+11,11,a pink car and a red elephant,a pink car;a red elephant,car;elephant
+12,12,a green bench and a brown dog,a green bench;a brown dog,bench;dog
+13,13,a brown bench and a green dog,a brown bench;a green dog,bench;dog
+14,14,a green bench and a yellow dog,a green bench;a yellow dog,bench;dog
+15,15,a yellow bench and a green dog,a yellow bench;a green dog,bench;dog
+16,16,a brown dog and a blue horse,a brown dog;a blue horse,dog;horse
+17,17,a blue dog and a brown horse,a blue dog;a brown horse,dog;horse
+18,18,a yellow dog and a brown horse,a yellow dog;a brown horse,dog;horse
+19,19,a brown dog and a yellow horse,a brown dog;a yellow horse,dog;horse
+20,20,a red chair and a brown dog,a red chair;a brown dog,chair;dog
+21,21,a brown chair and a red dog,a brown chair;a red dog,chair;dog
+22,22,a red chair and a yellow dog,a red chair;a yellow dog,chair;dog
+23,23,a yellow chair and a red dog,a yellow chair;a red dog,chair;dog
+24,24,a green bench and a red train,a green bench;a red train,bench;train
+25,25,a red bench and a green train,a red bench;a green train,bench;train
+26,26,a green bench and a yellow train,a green bench;a yellow train,bench;train
+27,27,a yellow bench and a green train,a yellow bench;a green train,bench;train
+28,28,a green bench and a blue boat,a green bench;a blue boat,bench;boat
+29,29,a blue bench and a green boat,a blue bench;a green boat,bench;boat
+30,30,a green bench and a red boat,a green bench;a red boat,bench;boat
+31,31,a red bench and a green boat,a red bench;a green boat,bench;boat
+32,32,a gold clock and a blue vase,a gold clock;a blue vase,clock;vase
+33,33,a blue clock and a gold vase,a blue clock;a gold vase,clock;vase
+34,34,a gold clock and a green vase,a gold clock;a green vase,clock;vase
+35,35,a green clock and a gold vase,a green clock;a gold vase,clock;vase
+36,36,a red car and a brown cow,a red car;a brown cow,car;cow
+37,37,a brown car and a red cow,a brown car;a red cow,car;cow
+38,38,a blue car and a brown cow,a blue car;a brown cow,car;cow
+39,39,a brown car and a blue cow,a brown car;a blue cow,car;cow
+40,40,a red bird and a brown giraffe,a red bird;a brown giraffe,bird;giraffe
+41,41,a brown bird and a red giraffe,a brown bird;a red giraffe,bird;giraffe
+42,42,a brown cow and a pink sheep,a brown cow;a pink sheep,cow;sheep
+43,43,a pink cow and a brown sheep,a pink cow;a brown sheep,cow;sheep
+44,44,a red cow and a brown sheep,a red cow;a brown sheep,cow;sheep
+45,45,a brown cow and a red sheep,a brown cow;a red sheep,cow;sheep
+46,46,a blue boat and a red car,a blue boat;a red car,boat;car
+47,47,a red boat and a blue car,a red boat;a blue car,boat;car
+48,48,a red boat and a blue car,a red boat;a blue car,boat;car
+49,49,a blue boat and a red car,a blue boat;a red car,boat;car
+50,50,a blue bowl and a red cup,a blue bowl;a red cup,bowl;cup
+51,51,a red bowl and a blue cup,a red bowl;a blue cup,bowl;cup
+52,52,a red bowl and a blue cup,a red bowl;a blue cup,bowl;cup
+53,53,a blue bowl and a red cup,a blue bowl;a red cup,bowl;cup
+54,54,a green bench and a brown cat,a green bench;a brown cat,bench;cat
+55,55,a brown bench and a green cat,a brown bench;a green cat,bench;cat
+56,56,a green bench and a yellow cat,a green bench;a yellow cat,bench;cat
+57,57,a yellow bench and a green cat,a yellow bench;a green cat,bench;cat
+58,58,a red car and a brown sheep,a red car;a brown sheep,car;sheep
+59,59,a brown car and a red sheep,a brown car;a red sheep,car;sheep
+60,60,a red car and a pink sheep,a red car;a pink sheep,car;sheep
+61,61,a pink car and a red sheep,a pink car;a red sheep,car;sheep
+62,62,a brown cat and a yellow dog,a brown cat;a yellow dog,cat;dog
+63,63,a yellow cat and a brown dog,a yellow cat;a brown dog,cat;dog
+64,64,a yellow cat and a brown dog,a yellow cat;a brown dog,cat;dog
+65,65,a brown cat and a yellow dog,a brown cat;a yellow dog,cat;dog
+66,66,a blue bowl and a brown cat,a blue bowl;a brown cat,bowl;cat
+67,67,a brown bowl and a blue cat,a brown bowl;a blue cat,bowl;cat
+68,68,a blue bowl and a yellow cat,a blue bowl;a yellow cat,bowl;cat
+69,69,a yellow bowl and a blue cat,a yellow bowl;a blue cat,bowl;cat
+70,70,a brown cow and a blue horse,a brown cow;a blue horse,cow;horse
+71,71,a blue cow and a brown horse,a blue cow;a brown horse,cow;horse
+72,72,a red cow and a brown horse,a red cow;a brown horse,cow;horse
+73,73,a brown cow and a red horse,a brown cow;a red horse,cow;horse
+74,74,a red book and a gold clock,a red book;a gold clock,book;clock
+75,75,a gold book and a red clock,a gold book;a red clock,book;clock
+76,76,a red book and a brown clock,a red book;a brown clock,book;clock
+77,77,a brown book and a red clock,a brown book;a red clock,book;clock
+78,78,a red chair and a gold clock,a red chair;a gold clock,chair;clock
+79,79,a gold chair and a red clock,a gold chair;a red clock,chair;clock
+80,80,a red chair and a brown clock,a red chair;a brown clock,chair;clock
+81,81,a brown chair and a red clock,a brown chair;a red clock,chair;clock
+82,82,a brown bird and a pink elephant,a brown bird;a pink elephant,bird;elephant
+83,83,a pink bird and a brown elephant,a pink bird;a brown elephant,bird;elephant
+84,84,a red bird and a brown elephant,a red bird;a brown elephant,bird;elephant
+85,85,a brown bird and a red elephant,a brown bird;a red elephant,bird;elephant
+86,86,a red car and a brown cat,a red car;a brown cat,car;cat
+87,87,a brown car and a red cat,a brown car;a red cat,car;cat
+88,88,a red car and a yellow cat,a red car;a yellow cat,car;cat
+89,89,a yellow car and a red cat,a yellow car;a red cat,car;cat
+90,90,a brown cow and a yellow dog,a brown cow;a yellow dog,cow;dog
+91,91,a yellow cow and a brown dog,a yellow cow;a brown dog,cow;dog
+92,92,a red cow and a brown dog,a red cow;a brown dog,cow;dog
+93,93,a brown cow and a red dog,a brown cow;a red dog,cow;dog
+94,94,a green bench and a brown bird,a green bench;a brown bird,bench;bird
+95,95,a brown bench and a green bird,a brown bench;a green bird,bench;bird
+96,96,a green bench and a red bird,a green bench;a red bird,bench;bird
+97,97,a red bench and a green bird,a red bench;a green bird,bench;bird
+98,98,a green bench and a red book,a green bench;a red book,bench;book
+99,99,a red bench and a green book,a red bench;a green book,bench;book
+100,100,a green bench and a blue book,a green bench;a blue book,bench;book
+101,101,a blue bench and a green book,a blue bench;a green book,bench;book
+102,102,a brown bird and a pink sheep,a brown bird;a pink sheep,bird;sheep
+103,103,a pink bird and a brown sheep,a pink bird;a brown sheep,bird;sheep
+104,104,a red bird and a brown sheep,a red bird;a brown sheep,bird;sheep
+105,105,a brown bird and a red sheep,a brown bird;a red sheep,bird;sheep
+106,106,a green banana and a brown bird,a green banana;a brown bird,banana;bird
+107,107,a brown banana and a green bird,a brown banana;a green bird,banana;bird
+108,108,a green banana and a red bird,a green banana;a red bird,banana;bird
+109,109,a red banana and a green bird,a red banana;a green bird,banana;bird
+110,110,a blue bowl and a red orange,a blue bowl;a red orange,bowl;orange
+111,111,a red bowl and a blue orange,a red bowl;a blue orange,bowl;orange
+112,112,a blue bowl and a yellow orange,a blue bowl;a yellow orange,bowl;orange
+113,113,a yellow bowl and a blue orange,a yellow bowl;a blue orange,bowl;orange
+114,114,a blue backpack and a brown cat,a blue backpack;a brown cat,backpack;cat
+115,115,a brown backpack and a blue cat,a brown backpack;a blue cat,backpack;cat
+116,116,a blue backpack and a yellow cat,a blue backpack;a yellow cat,backpack;cat
+117,117,a yellow backpack and a blue cat,a yellow backpack;a blue cat,backpack;cat
+118,118,a brown dog and a pink sheep,a brown dog;a pink sheep,dog;sheep
+119,119,a pink dog and a brown sheep,a pink dog;a brown sheep,dog;sheep
+120,120,a yellow dog and a brown sheep,a yellow dog;a brown sheep,dog;sheep
+121,121,a brown dog and a yellow sheep,a brown dog;a yellow sheep,dog;sheep
+122,122,a red car and a brown horse,a red car;a brown horse,car;horse
+123,123,a brown car and a red horse,a brown car;a red horse,car;horse
+124,124,a red car and a blue horse,a red car;a blue horse,car;horse
+125,125,a blue car and a red horse,a blue car;a red horse,car;horse
+126,126,a red chair and a blue vase,a red chair;a blue vase,chair;vase
+127,127,a blue chair and a red vase,a blue chair;a red vase,chair;vase
+128,128,a red chair and a green vase,a red chair;a green vase,chair;vase
+129,129,a green chair and a red vase,a green chair;a red vase,chair;vase
+130,130,a green apple and a brown bird,a green apple;a brown bird,apple;bird
+131,131,a brown apple and a green bird,a brown apple;a green bird,apple;bird
+132,132,a green apple and a red bird,a green apple;a red bird,apple;bird
+133,133,a red apple and a green bird,a red apple;a green bird,apple;bird
+134,134,a blue bowl and a green vase,a blue bowl;a green vase,bowl;vase
+135,135,a green bowl and a blue vase,a green bowl;a blue vase,bowl;vase
+136,136,a red bowl and a blue vase,a red bowl;a blue vase,bowl;vase
+137,137,a blue bowl and a red vase,a blue bowl;a red vase,bowl;vase
+138,138,a blue backpack and a red suitcase,a blue backpack;a red suitcase,backpack;suitcase
+139,139,a red backpack and a blue suitcase,a red backpack;a blue suitcase,backpack;suitcase
+140,140,a red backpack and a blue suitcase,a red backpack;a blue suitcase,backpack;suitcase
+141,141,a blue backpack and a red suitcase,a blue backpack;a red suitcase,backpack;suitcase
+142,142,a brown bird and a gold clock,a brown bird;a gold clock,bird;clock
+143,143,a gold bird and a brown clock,a gold bird;a brown clock,bird;clock
+144,144,a red bird and a gold clock,a red bird;a gold clock,bird;clock
+145,145,a gold bird and a red clock,a gold bird;a red clock,bird;clock
+146,146,a brown bird and a red cow,a brown bird;a red cow,bird;cow
+147,147,a red bird and a brown cow,a red bird;a brown cow,bird;cow
+148,148,a red bird and a brown cow,a red bird;a brown cow,bird;cow
+149,149,a brown bird and a red cow,a brown bird;a red cow,bird;cow
+150,150,a green bench and a red chair,a green bench;a red chair,bench;chair
+151,151,a red bench and a green chair,a red bench;a green chair,bench;chair
+152,152,a green bench and a blue chair,a green bench;a blue chair,bench;chair
+153,153,a blue bench and a green chair,a blue bench;a green chair,bench;chair
+154,154,a blue boat and a gold clock,a blue boat;a gold clock,boat;clock
+155,155,a gold boat and a blue clock,a gold boat;a blue clock,boat;clock
+156,156,a blue boat and a brown clock,a blue boat;a brown clock,boat;clock
+157,157,a brown boat and a blue clock,a brown boat;a blue clock,boat;clock
+158,158,a brown horse and a pink sheep,a brown horse;a pink sheep,horse;sheep
+159,159,a pink horse and a brown sheep,a pink horse;a brown sheep,horse;sheep
+160,160,a blue horse and a brown sheep,a blue horse;a brown sheep,horse;sheep
+161,161,a brown horse and a blue sheep,a brown horse;a blue sheep,horse;sheep
+162,162,a brown bird and a blue bowl,a brown bird;a blue bowl,bird;bowl
+163,163,a blue bird and a brown bowl,a blue bird;a brown bowl,bird;bowl
+164,164,a brown bird and a red bowl,a brown bird;a red bowl,bird;bowl
+165,165,a red bird and a brown bowl,a red bird;a brown bowl,bird;bowl
+166,166,a blue boat and a brown cow,a blue boat;a brown cow,boat;cow
+167,167,a brown boat and a blue cow,a brown boat;a blue cow,boat;cow
+168,168,a blue boat and a red cow,a blue boat;a red cow,boat;cow
+169,169,a red boat and a blue cow,a red boat;a blue cow,boat;cow
+170,170,a red book and a brown cat,a red book;a brown cat,book;cat
+171,171,a brown book and a red cat,a brown book;a red cat,book;cat
+172,172,a red book and a yellow cat,a red book;a yellow cat,book;cat
+173,173,a yellow book and a red cat,a yellow book;a red cat,book;cat
+174,174,a green apple and a yellow banana,a green apple;a yellow banana,apple;banana
+175,175,a yellow apple and a green banana,a yellow apple;a green banana,apple;banana
+176,176,a red apple and a green banana,a red apple;a green banana,apple;banana
+177,177,a green apple and a red banana,a green apple;a red banana,apple;banana
+178,178,a green apple and a red orange,a green apple;a red orange,apple;orange
+179,179,a red apple and a green orange,a red apple;a green orange,apple;orange
+180,180,a green apple and a yellow orange,a green apple;a yellow orange,apple;orange
+181,181,a yellow apple and a green orange,a yellow apple;a green orange,apple;orange
+182,182,a brown cat and a pink sheep,a brown cat;a pink sheep,cat;sheep
+183,183,a pink cat and a brown sheep,a pink cat;a brown sheep,cat;sheep
+184,184,a yellow cat and a brown sheep,a yellow cat;a brown sheep,cat;sheep
+185,185,a brown cat and a yellow sheep,a brown cat;a yellow sheep,cat;sheep
+186,186,a brown cat and a red chair,a brown cat;a red chair,cat;chair
+187,187,a red cat and a brown chair,a red cat;a brown chair,cat;chair
+188,188,a brown cat and a blue chair,a brown cat;a blue chair,cat;chair
+189,189,a blue cat and a brown chair,a blue cat;a brown chair,cat;chair
+190,190,a brown bird and a red car,a brown bird;a red car,bird;car
+191,191,a red bird and a brown car,a red bird;a brown car,bird;car
+192,192,a brown bird and a blue car,a brown bird;a blue car,bird;car
+193,193,a blue bird and a brown car,a blue bird;a brown car,bird;car
+194,194,a brown cat and a blue cup,a brown cat;a blue cup,cat;cup
+195,195,a blue cat and a brown cup,a blue cat;a brown cup,cat;cup
+196,196,a brown cat and a red cup,a brown cat;a red cup,cat;cup
+197,197,a red cat and a brown cup,a red cat;a brown cup,cat;cup
+198,198,a blue cup and a green vase,a blue cup;a green vase,cup;vase
+199,199,a green cup and a blue vase,a green cup;a blue vase,cup;vase
+200,200,a red cup and a blue vase,a red cup;a blue vase,cup;vase
+201,201,a blue cup and a red vase,a blue cup;a red vase,cup;vase
+202,202,a pink elephant and a brown giraffe,a pink elephant;a brown giraffe,elephant;giraffe
+203,203,a brown elephant and a pink giraffe,a brown elephant;a pink giraffe,elephant;giraffe
+204,204,a green banana and a red orange,a green banana;a red orange,banana;orange
+205,205,a red banana and a green orange,a red banana;a green orange,banana;orange
+206,206,a green banana and a yellow orange,a green banana;a yellow orange,banana;orange
+207,207,a yellow banana and a green orange,a yellow banana;a green orange,banana;orange
+208,208,a gold clock and a red train,a gold clock;a red train,clock;train
+209,209,a red clock and a gold train,a red clock;a gold train,clock;train
+210,210,a gold clock and a yellow train,a gold clock;a yellow train,clock;train
+211,211,a yellow clock and a gold train,a yellow clock;a gold train,clock;train
+212,212,a green bench and a gold clock,a green bench;a gold clock,bench;clock
+213,213,a gold bench and a green clock,a gold bench;a green clock,bench;clock
+214,214,a green bench and a brown clock,a green bench;a brown clock,bench;clock
+215,215,a brown bench and a green clock,a brown bench;a green clock,bench;clock
+216,216,a brown bird and a blue boat,a brown bird;a blue boat,bird;boat
+217,217,a blue bird and a brown boat,a blue bird;a brown boat,bird;boat
+218,218,a brown bird and a red boat,a brown bird;a red boat,bird;boat
+219,219,a red bird and a brown boat,a red bird;a brown boat,bird;boat
+220,220,a red book and a blue suitcase,a red book;a blue suitcase,book;suitcase
+221,221,a blue book and a red suitcase,a blue book;a red suitcase,book;suitcase
+222,222,a blue book and a red suitcase,a blue book;a red suitcase,book;suitcase
+223,223,a red book and a blue suitcase,a red book;a blue suitcase,book;suitcase
+224,224,a green banana and a blue cake,a green banana;a blue cake,banana;cake
+225,225,a blue banana and a green cake,a blue banana;a green cake,banana;cake
+226,226,a green banana and a pink cake,a green banana;a pink cake,banana;cake
+227,227,a pink banana and a green cake,a pink banana;a green cake,banana;cake
+228,228,a red car and a brown giraffe,a red car;a brown giraffe,car;giraffe
+229,229,a brown car and a red giraffe,a brown car;a red giraffe,car;giraffe
+230,230,a blue car and a brown giraffe,a blue car;a brown giraffe,car;giraffe
+231,231,a brown car and a blue giraffe,a brown car;a blue giraffe,car;giraffe
+232,232,a blue boat and a brown dog,a blue boat;a brown dog,boat;dog
+233,233,a brown boat and a blue dog,a brown boat;a blue dog,boat;dog
+234,234,a blue boat and a yellow dog,a blue boat;a yellow dog,boat;dog
+235,235,a yellow boat and a blue dog,a yellow boat;a blue dog,boat;dog
+236,236,a brown cat and a red suitcase,a brown cat;a red suitcase,cat;suitcase
+237,237,a red cat and a brown suitcase,a red cat;a brown suitcase,cat;suitcase
+238,238,a brown cat and a blue suitcase,a brown cat;a blue suitcase,cat;suitcase
+239,239,a blue cat and a brown suitcase,a blue cat;a brown suitcase,cat;suitcase
+240,240,a green banana and a blue bowl,a green banana;a blue bowl,banana;bowl
+241,241,a blue banana and a green bowl,a blue banana;a green bowl,banana;bowl
+242,242,a green banana and a red bowl,a green banana;a red bowl,banana;bowl
+243,243,a red banana and a green bowl,a red banana;a green bowl,banana;bowl
+244,244,a green apple and a blue bowl,a green apple;a blue bowl,apple;bowl
+245,245,a blue apple and a green bowl,a blue apple;a green bowl,apple;bowl
+246,246,a green apple and a red bowl,a green apple;a red bowl,apple;bowl
+247,247,a red apple and a green bowl,a red apple;a green bowl,apple;bowl
+248,248,a brown bird and a red chair,a brown bird;a red chair,bird;chair
+249,249,a red bird and a brown chair,a red bird;a brown chair,bird;chair
+250,250,a brown bird and a blue chair,a brown bird;a blue chair,bird;chair
+251,251,a blue bird and a brown chair,a blue bird;a brown chair,bird;chair
+252,252,a brown dog and a red suitcase,a brown dog;a red suitcase,dog;suitcase
+253,253,a red dog and a brown suitcase,a red dog;a brown suitcase,dog;suitcase
+254,254,a brown dog and a blue suitcase,a brown dog;a blue suitcase,dog;suitcase
+255,255,a blue dog and a brown suitcase,a blue dog;a brown suitcase,dog;suitcase
+256,256,a brown bird and a yellow cat,a brown bird;a yellow cat,bird;cat
+257,257,a yellow bird and a brown cat,a yellow bird;a brown cat,bird;cat
+258,258,a red bird and a brown cat,a red bird;a brown cat,bird;cat
+259,259,a brown bird and a red cat,a brown bird;a red cat,bird;cat
+260,260,a red car and a yellow train,a red car;a yellow train,car;train
+261,261,a yellow car and a red train,a yellow car;a red train,car;train
+262,262,a blue car and a red train,a blue car;a red train,car;train
+263,263,a red car and a blue train,a red car;a blue train,car;train
+264,264,a red car and a brown dog,a red car;a brown dog,car;dog
+265,265,a brown car and a red dog,a brown car;a red dog,car;dog
+266,266,a red car and a yellow dog,a red car;a yellow dog,car;dog
+267,267,a yellow car and a red dog,a yellow car;a red dog,car;dog
+268,268,a red book and a brown dog,a red book;a brown dog,book;dog
+269,269,a brown book and a red dog,a brown book;a red dog,book;dog
+270,270,a red book and a yellow dog,a red book;a yellow dog,book;dog
+271,271,a yellow book and a red dog,a yellow book;a red dog,book;dog
+272,272,a red car and a blue suitcase,a red car;a blue suitcase,car;suitcase
+273,273,a blue car and a red suitcase,a blue car;a red suitcase,car;suitcase
+274,274,a blue car and a red suitcase,a blue car;a red suitcase,car;suitcase
+275,275,a red car and a blue suitcase,a red car;a blue suitcase,car;suitcase
+276,276,a red chair and a brown giraffe,a red chair;a brown giraffe,chair;giraffe
+277,277,a brown chair and a red giraffe,a brown chair;a red giraffe,chair;giraffe
+278,278,a green banana and a brown sheep,a green banana;a brown sheep,banana;sheep
+279,279,a brown banana and a green sheep,a brown banana;a green sheep,banana;sheep
+280,280,a brown elephant and a blue vase,a brown elephant;a blue vase,elephant;vase
+281,281,a blue elephant and a brown vase,a blue elephant;a brown vase,elephant;vase
+282,282,a red chair and a blue cup,a red chair;a blue cup,chair;cup
+283,283,a blue chair and a red cup,a blue chair;a red cup,chair;cup
+284,284,a brown giraffe and a red suitcase,a brown giraffe;a red suitcase,giraffe;suitcase
+285,285,a red giraffe and a brown suitcase,a red giraffe;a brown suitcase,giraffe;suitcase
+286,286,a brown bear and a blue cup,a brown bear;a blue cup,bear;cup
+287,287,a blue bear and a brown cup,a blue bear;a brown cup,bear;cup
+288,288,a blue backpack and a brown horse,a blue backpack;a brown horse,backpack;horse
+289,289,a brown backpack and a blue horse,a brown backpack;a blue horse,backpack;horse
+290,290,a red book and a brown cow,a red book;a brown cow,book;cow
+291,291,a brown book and a red cow,a brown book;a red cow,book;cow
+292,292,a red book and a blue bowl,a red book;a blue bowl,book;bowl
+293,293,a blue book and a red bowl,a blue book;a red bowl,book;bowl
+294,294,a blue backpack and a brown elephant,a blue backpack;a brown elephant,backpack;elephant
+295,295,a brown backpack and a blue elephant,a brown backpack;a blue elephant,backpack;elephant
+296,296,a brown cow and a blue vase,a brown cow;a blue vase,cow;vase
+297,297,a blue cow and a brown vase,a blue cow;a brown vase,cow;vase
+298,298,a gold clock and a red suitcase,a gold clock;a red suitcase,clock;suitcase
+299,299,a red clock and a gold suitcase,a red clock;a gold suitcase,clock;suitcase
+300,300,a green apple and a red book,a green apple;a red book,apple;book
+301,301,a red apple and a green book,a red apple;a green book,apple;book
+302,302,a green apple and a brown sheep,a green apple;a brown sheep,apple;sheep
+303,303,a brown apple and a green sheep,a brown apple;a green sheep,apple;sheep
+304,304,a red book and a brown horse,a red book;a brown horse,book;horse
+305,305,a brown book and a red horse,a brown book;a red horse,book;horse
+306,306,a blue cup and a red suitcase,a blue cup;a red suitcase,cup;suitcase
+307,307,a red cup and a blue suitcase,a red cup;a blue suitcase,cup;suitcase
+308,308,a blue bowl and a red car,a blue bowl;a red car,bowl;car
+309,309,a red bowl and a blue car,a red bowl;a blue car,bowl;car
+310,310,a blue cake and a brown giraffe,a blue cake;a brown giraffe,cake;giraffe
+311,311,a brown cake and a blue giraffe,a brown cake;a blue giraffe,cake;giraffe
+312,312,a blue cake and a gold clock,a blue cake;a gold clock,cake;clock
+313,313,a gold cake and a blue clock,a gold cake;a blue clock,cake;clock
+314,314,a green apple and a blue boat,a green apple;a blue boat,apple;boat
+315,315,a blue apple and a green boat,a blue apple;a green boat,apple;boat
+316,316,a brown cow and a red orange,a brown cow;a red orange,cow;orange
+317,317,a red cow and a brown orange,a red cow;a brown orange,cow;orange
+318,318,a blue bowl and a red chair,a blue bowl;a red chair,bowl;chair
+319,319,a red bowl and a blue chair,a red bowl;a blue chair,bowl;chair
+320,320,a blue cake and a brown cow,a blue cake;a brown cow,cake;cow
+321,321,a brown cake and a blue cow,a brown cake;a blue cow,cake;cow
+322,322,a green banana and a red train,a green banana;a red train,banana;train
+323,323,a red banana and a green train,a red banana;a green train,banana;train
+324,324,a green apple and a red car,a green apple;a red car,apple;car
+325,325,a red apple and a green car,a red apple;a green car,apple;car
+326,326,a green apple and a brown giraffe,a green apple;a brown giraffe,apple;giraffe
+327,327,a brown apple and a green giraffe,a brown apple;a green giraffe,apple;giraffe
+328,328,a red book and a blue cup,a red book;a blue cup,book;cup
+329,329,a blue book and a red cup,a blue book;a red cup,book;cup
+330,330,a blue boat and a red orange,a blue boat;a red orange,boat;orange
+331,331,a red boat and a blue orange,a red boat;a blue orange,boat;orange
+332,332,a gold clock and a brown giraffe,a gold clock;a brown giraffe,clock;giraffe
+333,333,a brown clock and a gold giraffe,a brown clock;a gold giraffe,clock;giraffe
+334,334,a red book and a brown giraffe,a red book;a brown giraffe,book;giraffe
+335,335,a brown book and a red giraffe,a brown book;a red giraffe,book;giraffe
+336,336,a green bench and a blue bowl,a green bench;a blue bowl,bench;bowl
+337,337,a blue bench and a green bowl,a blue bench;a green bowl,bench;bowl
+338,338,a green bench and a blue cake,a green bench;a blue cake,bench;cake
+339,339,a blue bench and a green cake,a blue bench;a green cake,bench;cake
+340,340,a brown horse and a blue vase,a brown horse;a blue vase,horse;vase
+341,341,a blue horse and a brown vase,a blue horse;a brown vase,horse;vase
+342,342,a blue backpack and a brown cow,a blue backpack;a brown cow,backpack;cow
+343,343,a brown backpack and a blue cow,a brown backpack;a blue cow,backpack;cow
+344,344,a blue backpack and a red book,a blue backpack;a red book,backpack;book
+345,345,a red backpack and a blue book,a red backpack;a blue book,backpack;book
+346,346,a brown bear and a red book,a brown bear;a red book,bear;book
+347,347,a red bear and a brown book,a red bear;a brown book,bear;book
+348,348,a red orange and a brown sheep,a red orange;a brown sheep,orange;sheep
+349,349,a brown orange and a red sheep,a brown orange;a red sheep,orange;sheep
+350,350,a green banana and a brown dog,a green banana;a brown dog,banana;dog
+351,351,a brown banana and a green dog,a brown banana;a green dog,banana;dog
+352,352,a green banana and a brown horse,a green banana;a brown horse,banana;horse
+353,353,a brown banana and a green horse,a brown banana;a green horse,banana;horse
+354,354,a blue cake and a red suitcase,a blue cake;a red suitcase,cake;suitcase
+355,355,a red cake and a blue suitcase,a red cake;a blue suitcase,cake;suitcase
+356,356,a brown elephant and a red suitcase,a brown elephant;a red suitcase,elephant;suitcase
+357,357,a red elephant and a brown suitcase,a red elephant;a brown suitcase,elephant;suitcase
+358,358,a green apple and a brown horse,a green apple;a brown horse,apple;horse
+359,359,a brown apple and a green horse,a brown apple;a green horse,apple;horse
+360,360,a green banana and a blue vase,a green banana;a blue vase,banana;vase
+361,361,a blue banana and a green vase,a blue banana;a green vase,banana;vase
+362,362,a blue backpack and a brown bear,a blue backpack;a brown bear,backpack;bear
+363,363,a brown backpack and a blue bear,a brown backpack;a blue bear,backpack;bear
+364,364,a green apple and a blue vase,a green apple;a blue vase,apple;vase
+365,365,a blue apple and a green vase,a blue apple;a green vase,apple;vase
+366,366,a green banana and a red suitcase,a green banana;a red suitcase,banana;suitcase
+367,367,a red banana and a green suitcase,a red banana;a green suitcase,banana;suitcase
+368,368,a blue bowl and a brown elephant,a blue bowl;a brown elephant,bowl;elephant
+369,369,a brown bowl and a blue elephant,a brown bowl;a blue elephant,bowl;elephant
+370,370,a blue backpack and a red orange,a blue backpack;a red orange,backpack;orange
+371,371,a red backpack and a blue orange,a red backpack;a blue orange,backpack;orange
+372,372,a blue backpack and a red chair,a blue backpack;a red chair,backpack;chair
+373,373,a red backpack and a blue chair,a red backpack;a blue chair,backpack;chair
+374,374,a blue cup and a brown horse,a blue cup;a brown horse,cup;horse
+375,375,a brown cup and a blue horse,a brown cup;a blue horse,cup;horse
+376,376,a brown sheep and a blue vase,a brown sheep;a blue vase,sheep;vase
+377,377,a blue sheep and a brown vase,a blue sheep;a brown vase,sheep;vase
+378,378,a brown cat and a gold clock,a brown cat;a gold clock,cat;clock
+379,379,a gold cat and a brown clock,a gold cat;a brown clock,cat;clock
+380,380,a blue backpack and a green banana,a blue backpack;a green banana,backpack;banana
+381,381,a green backpack and a blue banana,a green backpack;a blue banana,backpack;banana
+382,382,a brown horse and a red orange,a brown horse;a red orange,horse;orange
+383,383,a red horse and a brown orange,a red horse;a brown orange,horse;orange
+384,384,a red chair and a brown elephant,a red chair;a brown elephant,chair;elephant
+385,385,a brown chair and a red elephant,a brown chair;a red elephant,chair;elephant
+386,386,a green apple and a blue backpack,a green apple;a blue backpack,apple;backpack
+387,387,a blue apple and a green backpack,a blue apple;a green backpack,apple;backpack
+388,388,a blue backpack and a gold clock,a blue backpack;a gold clock,backpack;clock
+389,389,a gold backpack and a blue clock,a gold backpack;a blue clock,backpack;clock
+390,390,a brown dog and a red orange,a brown dog;a red orange,dog;orange
+391,391,a red dog and a brown orange,a red dog;a brown orange,dog;orange
+392,392,a blue backpack and a brown sheep,a blue backpack;a brown sheep,backpack;sheep
+393,393,a brown backpack and a blue sheep,a brown backpack;a blue sheep,backpack;sheep
+394,394,a blue backpack and a brown giraffe,a blue backpack;a brown giraffe,backpack;giraffe
+395,395,a brown backpack and a blue giraffe,a brown backpack;a blue giraffe,backpack;giraffe
+396,396,a red book and a blue cake,a red book;a blue cake,book;cake
+397,397,a blue book and a red cake,a blue book;a red cake,book;cake
+398,398,a red suitcase and a blue vase,a red suitcase;a blue vase,suitcase;vase
+399,399,a blue suitcase and a red vase,a blue suitcase;a red vase,suitcase;vase
+400,400,a blue cup and a brown sheep,a blue cup;a brown sheep,cup;sheep
+401,401,a brown cup and a blue sheep,a brown cup;a blue sheep,cup;sheep
+402,402,a brown bear and a red train,a brown bear;a red train,bear;train
+403,403,a red bear and a brown train,a red bear;a brown train,bear;train
+404,404,a blue cup and a red orange,a blue cup;a red orange,cup;orange
+405,405,a red cup and a blue orange,a red cup;a blue orange,cup;orange
+406,406,a green apple and a red suitcase,a green apple;a red suitcase,apple;suitcase
+407,407,a red apple and a green suitcase,a red apple;a green suitcase,apple;suitcase
+408,408,a blue bowl and a red train,a blue bowl;a red train,bowl;train
+409,409,a red bowl and a blue train,a red bowl;a blue train,bowl;train
+410,410,a green bench and a red orange,a green bench;a red orange,bench;orange
+411,411,a red bench and a green orange,a red bench;a green orange,bench;orange
+412,412,a brown cat and a red orange,a brown cat;a red orange,cat;orange
+413,413,a red cat and a brown orange,a red cat;a brown orange,cat;orange
+414,414,a green apple and a red train,a green apple;a red train,apple;train
+415,415,a red apple and a green train,a red apple;a green train,apple;train
+416,416,a brown giraffe and a red train,a brown giraffe;a red train,giraffe;train
+417,417,a red giraffe and a brown train,a red giraffe;a brown train,giraffe;train
+418,418,a blue boat and a red suitcase,a blue boat;a red suitcase,boat;suitcase
+419,419,a red boat and a blue suitcase,a red boat;a blue suitcase,boat;suitcase
+420,420,a blue bowl and a brown horse,a blue bowl;a brown horse,bowl;horse
+421,421,a brown bowl and a blue horse,a brown bowl;a blue horse,bowl;horse
+422,422,a blue backpack and a red train,a blue backpack;a red train,backpack;train
+423,423,a red backpack and a blue train,a red backpack;a blue train,backpack;train
+424,424,a gold clock and a red orange,a gold clock;a red orange,clock;orange
+425,425,a red clock and a gold orange,a red clock;a gold orange,clock;orange
+426,426,a brown bear and a blue vase,a brown bear;a blue vase,bear;vase
+427,427,a blue bear and a brown vase,a blue bear;a brown vase,bear;vase
+428,428,a green apple and a brown elephant,a green apple;a brown elephant,apple;elephant
+429,429,a brown apple and a green elephant,a brown apple;a green elephant,apple;elephant
+430,430,a green banana and a brown bear,a green banana;a brown bear,banana;bear
+431,431,a brown banana and a green bear,a brown banana;a green bear,banana;bear
+432,432,a blue boat and a brown cat,a blue boat;a brown cat,boat;cat
+433,433,a brown boat and a blue cat,a brown boat;a blue cat,boat;cat
+434,434,a green banana and a blue boat,a green banana;a blue boat,banana;boat
+435,435,a blue banana and a green boat,a blue banana;a green boat,banana;boat
+436,436,a red car and a blue cup,a red car;a blue cup,car;cup
+437,437,a blue car and a red cup,a blue car;a red cup,car;cup
+438,438,a blue backpack and a red car,a blue backpack;a red car,backpack;car
+439,439,a red backpack and a blue car,a red backpack;a blue car,backpack;car
+440,440,a brown cow and a blue cup,a brown cow;a blue cup,cow;cup
+441,441,a blue cow and a brown cup,a blue cow;a brown cup,cow;cup
+442,442,a red train and a blue vase,a red train;a blue vase,train;vase
+443,443,a blue train and a red vase,a blue train;a red vase,train;vase
+444,444,a brown giraffe and a red orange,a brown giraffe;a red orange,giraffe;orange
+445,445,a red giraffe and a brown orange,a red giraffe;a brown orange,giraffe;orange
+446,446,a green banana and a brown cow,a green banana;a brown cow,banana;cow
+447,447,a brown banana and a green cow,a brown banana;a green cow,banana;cow
+448,448,a brown giraffe and a blue vase,a brown giraffe;a blue vase,giraffe;vase
+449,449,a blue giraffe and a brown vase,a blue giraffe;a brown vase,giraffe;vase
+450,450,a brown cow and a red suitcase,a brown cow;a red suitcase,cow;suitcase
+451,451,a red cow and a brown suitcase,a red cow;a brown suitcase,cow;suitcase
+452,452,a green apple and a blue cup,a green apple;a blue cup,apple;cup
+453,453,a blue apple and a green cup,a blue apple;a green cup,apple;cup
+454,454,a red book and a brown sheep,a red book;a brown sheep,book;sheep
+455,455,a brown book and a red sheep,a brown book;a red sheep,book;sheep
+456,456,a green banana and a brown giraffe,a green banana;a brown giraffe,banana;giraffe
+457,457,a brown banana and a green giraffe,a brown banana;a green giraffe,banana;giraffe
+458,458,a blue boat and a red book,a blue boat;a red book,boat;book
+459,459,a red boat and a blue book,a red boat;a blue book,boat;book
+460,460,a blue cup and a brown elephant,a blue cup;a brown elephant,cup;elephant
+461,461,a brown cup and a blue elephant,a brown cup;a blue elephant,cup;elephant
+462,462,a red chair and a brown sheep,a red chair;a brown sheep,chair;sheep
+463,463,a brown chair and a red sheep,a brown chair;a red sheep,chair;sheep
+464,464,a brown bear and a blue boat,a brown bear;a blue boat,bear;boat
+465,465,a blue bear and a brown boat,a blue bear;a brown boat,bear;boat
+466,466,a red car and a white sheep,a red car;a white sheep,car;sheep
+467,467,a blue bird and a brown bear,a blue bird;a brown bear,bird;bear
+468,468,a green apple and a black backpack,a green apple;a black backpack,apple;backpack
+469,469,a green cup and a blue cell phone,a green cup;a blue cell phone,cup;phone
+470,470,a yellow book and a red vase,a yellow book;a red vase,book;vase
+471,471,a white car and a red sheep,a white car;a red sheep,car;sheep
+472,472,a brown bird and a blue bear,a brown bird;a blue bear,bird;bear
+473,473,a black apple and a green backpack,a black apple;a green backpack,apple;backpack
+474,474,a blue cup and a green cell phone,a blue cup;a green cell phone,cup;phone
+475,475,a red book and a yellow vase,a red book;a yellow vase,book;vase
+476,476,a red cylinder and a blue cube,a red cylinder;a blue cube,cylinder;cube
+477,477,a blue cylinder and a red cube,a blue cylinder;a red cube,cylinder;cube
+478,478,a red apple and yellow bananas,a red apple;yellow bananas,apple;bananas
+479,479,a yellow apple and red bananas,a yellow apple;red bananas,apple;bananas
+480,480,a stack of three red cubes with a blue sphere on the right and two green cones on the left,a stack;three red cubes;a blue sphere;the right;two green cones;the left,stack;cubes;sphere;right;cones;left
+481,481,a metallic blue sphere to the left of a yellow box made of felt,a metallic blue sphere;the left;a yellow box,sphere;left;box
+482,482,a blue wooden pyramid on top of a red plastic box,a blue wooden pyramid;a red plastic box,pyramid;box
+483,483,a red cube on top of a blue cube,a red cube;a blue cube,cube;cube
+484,484,a white flag with a red circle next to a solid blue flag,a white flag;a red circle;a solid blue flag,flag;circle;flag
+485,485,a red circle on top of a blue square,a red circle;a blue square,circle;square
+486,486,a yellow box to the right of a blue sphere,a yellow box;the right;a blue sphere,box;right;sphere
+487,487,a red box to the right of a green sphere,a red box;the right;a green sphere,box;right;sphere
+488,488,a red box next to a blue box,a red box;a blue box,box;box
+489,489,a red sphere on top of a yellow box,a red sphere;a yellow box,sphere;box
+490,490,a large blue box with three small yellow boxes on it,a large blue box;three small yellow boxes,box;boxes
+491,491,a red block to the left of a blue pyramid,a red block;the left;a blue pyramid,block;left;pyramid
+492,492,three small yellow boxes on a large blue box,three small yellow boxes;a large blue box,boxes;box
+493,493,a black background with a large yellow circle,a black background;a large yellow circle,background;circle
+494,494,a white background with a large blue circle,a white background;a large blue circle,background;circle
+495,495,a black background with a large yellow square,a black background;a large yellow square,background;square
+496,496,a white background with a large blue square,a white background;a large blue square,background;square
+497,497,a black background with a large yellow circle and a small red square,a black background;a large yellow circle;a small red square,background;circle;square
+498,498,a white background with a large blue circle and a small green square,a white background;a large blue circle;a small green square,background;circle;square
+499,499,a large yellow triangle above a green square and red rectangle,a large yellow triangle;a green square;red rectangle,triangle;square;rectangle
+500,500,two small circles to the left of a red triangle that is on a green rectangle,two small circles;the left;a red triangle;a green rectangle,circles;left;triangle;rectangle
+501,501,a green pyramid in front of a blue box,a green pyramid;a blue box,pyramid;box
+502,502,a large yellow sphere behind a small purple pyramid,a large yellow sphere;a small purple pyramid,sphere;pyramid
+503,503,a metallic blue sphere to the left of a brown cardboard box,a metallic blue sphere;the left;a brown cardboard box,sphere;left;box
+504,504,a yellow swirl next to a blue dashed line,a yellow swirl;a blue dashed line,swirl;line
+505,505,a red swirl above a black dashed line,a red swirl;a black dashed line,swirl;line
+506,506,a green pepper to the left of a red pepper,a green pepper;the left;a red pepper,pepper;left;pepper
+507,507,a brown trash bin to the left of a blue recycling bin,a brown trash bin;the left;a blue recycling bin,bin;left;bin
+508,508,a circular brown trash bin in front of a brick wall,a circular brown trash bin;a brick wall,bin;wall
+509,509,two back to back wooden benches next to a shrub near a stone walkway,back wooden benches;a shrub;a stone walkway,benches;shrub;walkway
+510,510,two back to back stone benches next to a shrub near a wooden walkway,back stone benches;a shrub;a wooden walkway,benches;shrub;walkway
+511,511,an old building has stone arches and wooden doors,an old building;stone arches;wooden doors,building;arches;doors
+512,512,an old building has wooden arches and stone doors,an old building;wooden arches;stone doors,building;arches;doors
+513,513,"a tiled shower, molded plastic bathtub, shelf, mirror, wooden vanity, lamp, and sink make up a beige colored bathroom","a tiled shower , molded plastic bathtub , shelf , mirror , wooden vanity , lamp , and sink;a beige colored bathroom",sink;bathroom
+514,514,"a tiled shower , molded wooden bathtub , shelf , mirror , plastic vanity , lamp , and sink make up a beige colored bathroom","a tiled shower , molded wooden bathtub , shelf , mirror , plastic vanity , lamp , and sink;a beige colored bathroom",sink;bathroom
+515,515,a bathroom has gold tile and a silver box on the wall,a bathroom;gold tile;a silver box;the wall,bathroom;tile;box;wall
+516,516,a bathroom has silver tile and a gold box on the wall,a bathroom;silver tile;a gold box;the wall,bathroom;tile;box;wall
+517,517,this kitchen has wooden cabinets and silver and black appliances,this kitchen;wooden cabinets;black appliances,kitchen;cabinets;appliances
+518,518,this kitchen has silver cabinets and wooden and black appliances,this kitchen;silver cabinets;wooden and black appliances,kitchen;cabinets;appliances
+519,519,blue and silver motorcycle parked on pavement under plastic awning,blue and silver motorcycle;plastic awning,motorcycle;awning
+520,520,blue and plastic motorcycle parked on pavement under silver awning,blue and plastic motorcycle;silver awning,motorcycle;awning
+521,521,a stone building with a wooden bench placed near it,a stone building;a wooden bench,building;bench
+522,522,a wooden building with a stone bench placed near it,a wooden building;a stone bench,building;bench
+523,523,a cat is perched upon a wooden bench that sits on a stone patio,a cat;a wooden bench;a stone patio,cat;bench;patio
+524,524,a cat is perched upon a stone bench that sits on a wooden patio,a cat;a stone bench;a wooden patio,cat;bench;patio
+525,525,a wooden bench on a stone path with a green foliage background,a wooden bench;a stone path;a green foliage background,bench;path;background
+526,526,a stone bench on a wooden path with a green foliage background,a stone bench;a wooden path;a green foliage background,bench;path;background
+527,527,a plastic fork and lid sit on a wooden bench,a plastic fork;a wooden bench,fork;bench
+528,528,a wooden fork and lid sit on a plastic bench,a wooden fork;a plastic bench,fork;bench
+529,529,a white plastic fork and a container top left on a wooden bench,a white plastic fork;a container top;a wooden bench,fork;top;bench
+530,530,a white wooden fork and a container top left on a plastic bench,a white wooden fork;a container top;a plastic bench,fork;top;bench
+531,531,a plastic fork and dish on wooden slats,wooden slats,slats
+532,532,a wooden fork and dish on plastic slats,a wooden fork;plastic slats,fork;slats
+533,533,a stone statue of an elderly woman sits upon a wooden bench,a stone statue;an elderly woman;a wooden bench,statue;woman;bench
+534,534,a wooden statue of an elderly woman sits upon a stone bench,a wooden statue;an elderly woman;a stone bench,statue;woman;bench
+535,535,a wooden bench near a tree and a stone wall,a wooden bench;a tree;a stone wall,bench;tree;wall
+536,536,a stone bench near a tree and a wooden wall,a stone bench;a tree;a wooden wall,bench;tree;wall
+537,537,a green plastic chair sitting next to a wooden bench,a green plastic chair;a wooden bench,chair;bench
+538,538,a green wooden chair sitting next to a plastic bench,a green wooden chair;a plastic bench,chair;bench
+539,539,"an outdoor patio area with a wooden bench, plastic chair and a black piece of luggage with a closed umbrella resting on top of it",an outdoor patio area;a wooden bench;plastic chair;a black piece;a closed umbrella;top of it,area;bench;chair;piece;umbrella;it
+540,540,"an outdoor patio area with a plastic bench , wooden chair and a black piece of luggage with a closed umbrella resting on top of it",an outdoor patio area;a plastic bench;wooden chair;a black piece;a closed umbrella;top of it,area;bench;chair;piece;umbrella;it
+541,541,a gold colored dog lays nears some barrels on a wooden deck,a gold colored dog;some barrels;a wooden deck,dog;barrels;deck
+542,542,a wooden colored dog lays nears some barrels on a gold deck,a wooden colored dog;some barrels;a gold deck,dog;barrels;deck
+543,543,a zebra standing alone in the snow with a stone block wall and wooden fence behind it,a zebra;the snow;a stone block wall and wooden fence,zebra;snow;fence
+544,544,a zebra standing alone in the snow with a wooden block wall and stone fence behind it,a zebra;the snow;a wooden block wall and stone fence,zebra;snow;fence
+545,545,person handles yellow vegetable in silver pot at the wooden counter,yellow vegetable;silver pot;the wooden counter,vegetable;pot;counter
+546,546,person handles yellow vegetable in wooden pot at the silver counter,yellow vegetable;wooden pot;the silver counter,vegetable;pot;counter
+547,547,a skateboarder jumps over a stone dome with silver domes in front of it and bicycler behind him,a skateboarder;a stone dome;silver domes;front of it;bicycler behind him,skateboarder;dome;domes;it;him
+548,548,a skateboarder jumps over a silver dome with stone domes in front of it and bicycler behind him,a skateboarder;a silver dome;stone domes;front of it;bicycler behind him,skateboarder;dome;domes;it;him
+549,549,vegetables on a wooden table in plastic bags,a wooden table;plastic bags,table;bags
+550,550,vegetables on a plastic table in wooden bags,a plastic table;wooden bags,table;bags
+551,551,a plastic box full of powdered donuts on a wooden table,a plastic box;powdered donuts;a wooden table,box;donuts;table
+552,552,a wooden box full of powdered donuts on a plastic table,a wooden box;powdered donuts;a plastic table,box;donuts;table
+553,553,a silver stove sits next to a counter on a wooden floor,a silver stove;a counter;a wooden floor,stove;counter;floor
+554,554,a wooden stove sits next to a counter on a silver floor,a wooden stove;a counter;a silver floor,stove;counter;floor
+555,555,small silver laptop sitting on top of a wooden computer desk,small silver laptop;a wooden computer desk,laptop;desk
+556,556,small wooden laptop sitting on top of a silver computer desk,small wooden laptop;a silver computer desk,laptop;desk
+557,557,two plastic containers sitting on top of a wooden table,two plastic containers;a wooden table,containers;table
+558,558,two wooden containers sitting on top of a plastic table,two wooden containers;a plastic table,containers;table
+559,559,a laptop resting on a wooden table near a silver kettle,a laptop;a wooden table;a silver kettle,laptop;table;kettle
+560,560,a laptop resting on a silver table near a wooden kettle,a laptop;a silver table;a wooden kettle,laptop;table;kettle
+561,561,a table topped with wooden combs and plastic display cases,a table;wooden combs;plastic display cases,table;combs;cases
+562,562,a table topped with plastic combs and wooden display cases,a table;plastic combs;wooden display cases,table;combs;cases
+563,563,a shiny silver metal microwave near wooden cabinets,a shiny silver metal microwave;wooden cabinets,microwave;cabinets
+564,564,a shiny wooden metal microwave near silver cabinets,a shiny wooden metal microwave;silver cabinets,microwave;cabinets
+565,565,a wooden table with a black and silver blender,a wooden table;a black and silver blender,table;blender
+566,566,a silver table with a black and wooden blender,a silver table;a black and wooden blender,table;blender
+567,567,several silver hole punchers and other office supplies on a wooden table,several silver hole punchers;other office supplies;a wooden table,punchers;supplies;table
+568,568,several wooden hole punchers and other office supplies on a silver table,several wooden hole punchers;other office supplies;a silver table,punchers;supplies;table
+569,569,a small silver laptop on a wooden table,a small silver laptop;a wooden table,laptop;table
+570,570,a small wooden laptop on a silver table,a small wooden laptop;a silver table,laptop;table
+571,571,the wooden kitchen has a small child's plastic table in it,the wooden kitchen;a small child 's,kitchen;'s
+572,572,the plastic kitchen has a small child 's wooden table in it,the plastic kitchen;a small child 's,kitchen;'s
+573,573,a square wooden clock that reads 10:33 with a silver arch in front of it,a square wooden clock;a silver arch;front of it,clock;arch;it
+574,574,a square silver clock that reads 10:33 with a wooden arch in front of it,a square silver clock;a wooden arch;front of it,clock;arch;it
+575,575,"a living room with a stone fireplace, mission style furniture, and wooden blinds",a living room;a stone fireplace;mission style furniture;wooden blinds,room;fireplace;furniture;blinds
+576,576,"a living room with a wooden fireplace , mission style furniture , and stone blinds",a living room;a wooden fireplace;mission style furniture;stone blinds,room;fireplace;furniture;blinds
+577,577,"a wooden surface holds an opened beverage can, an open book, a meal and plastic fork on a glass plate, used and unused napkins, and most importantly a laptop, not on",a wooden surface;an opened beverage;an open book;a meal;plastic fork;a glass plate;unused napkins;a laptop,surface;beverage;book;meal;fork;plate;napkins;laptop
+578,578,"a plastic surface holds an opened beverage can , an open book , a meal and wooden fork on a glass plate , used and unused napkins , and most importantly a laptop , not on",a plastic surface;an opened beverage;an open book;a meal;wooden fork;a glass plate;unused napkins;a laptop,surface;beverage;book;meal;fork;plate;napkins;laptop
+579,579,a brown wooden table and a silver cellphone and another device,a brown wooden table;a silver cellphone;another device,table;cellphone;device
+580,580,a brown silver table and a wooden cellphone and another device,a brown silver table;a wooden cellphone;another device,table;cellphone;device
+581,581,a wooden stone with a clock on top,a wooden stone;a clock,stone;clock
+582,582,a stone wooden with a clock on top,a stone wooden;a clock,wooden;clock
+583,583,"a shiny, silver vase holds a colorful bouquet of flowers beside an elegant looking chair, in front of a floral print design, behind a gold colored rail","a shiny , silver vase;a colorful bouquet;an elegant looking chair;a floral print design;a gold colored rail",vase;bouquet;chair;design;rail
+584,584,"a shiny , gold vase holds a colorful bouquet of flowers beside an elegant looking chair , in front of a floral print design , behind a silver colored rail","a shiny , gold vase;a colorful bouquet;an elegant looking chair;a floral print design;a silver colored rail",vase;bouquet;chair;design;rail
+585,585,a small white cat on a large bowl,a small white cat;a large bowl,cat;bowl
+586,586,a large white cat on a small bowl,a large white cat;a small bowl,cat;bowl
+587,587,a small bathroom with a large mirror and single sink vanity,a small bathroom;a large mirror;single sink vanity,bathroom;mirror;vanity
+588,588,a large bathroom with a small mirror and single sink vanity,a large bathroom;a small mirror;single sink vanity,bathroom;mirror;vanity
+589,589,a small vehicle taxis a large jet down a runway,a small vehicle taxis;a large jet;a runway,taxis;jet;runway
+590,590,a large vehicle taxis a small jet down a runway,a large vehicle taxis;a small jet;a runway,taxis;jet;runway
+591,591,a large plant is in the corner of a small bathroom,a large plant;the corner;a small bathroom,plant;corner;bathroom
+592,592,a small plant is in the corner of a large bathroom,a small plant;the corner;a large bathroom,plant;corner;bathroom
+593,593,"a small bathroom, toilet and sink with a large window","a small bathroom , toilet and sink;a large window",sink;window
+594,594,"a large bathroom , toilet and sink with a small window","a large bathroom , toilet and sink;a small window",sink;window
+595,595,a small yellow and black car driving around the bend of a road between large hill formations,a small yellow and black car;the bend;a road;large hill formations,car;bend;road;formations
+596,596,a large yellow and black car driving around the bend of a road between small hill formations,a large yellow and black car;the bend;a road;small hill formations,car;bend;road;formations
+597,597,a large brick building with a small clock on it,a large brick building;a small clock,building;clock
+598,598,a small brick building with a large clock on it,a small brick building;a large clock,building;clock
+599,599,a woman cooking with a large white bot and a cooking board with meat in it in a small kitchen,a woman;a large white bot;a cooking board;a small kitchen,woman;bot;board;kitchen
+600,600,a woman cooking with a small white bot and a cooking board with meat in it in a large kitchen,a woman;a small white bot;a cooking board;a large kitchen,woman;bot;board;kitchen
+601,601,a tiny white toilet in a small bathroom,a tiny white toilet;a small bathroom,toilet;bathroom
+602,602,a small white toilet in a tiny bathroom,a small white toilet;a tiny bathroom,toilet;bathroom
+603,603,the small car is towing a large airplane,the small car;a large airplane,car;airplane
+604,604,the large car is towing a small airplane,the large car;a small airplane,car;airplane
+605,605,a small garage space with a bunch of large jars in it,a small garage space;a bunch;large jars,space;bunch;jars
+606,606,a large garage space with a bunch of small jars in it,a large garage space;a bunch;small jars,space;bunch;jars
+607,607,a small kitten sits in a large bowl,a small kitten;a large bowl,kitten;bowl
+608,608,a large kitten sits in a small bowl,a large kitten;a small bowl,kitten;bowl
+609,609,"a living room area features a large window, a white couch, a small table and a large area rug",a living room area;a large window;a white couch;a small table;a large area rug,area;window;couch;table;rug
+610,610,"a living room area features a small window , a white couch , a large table and a large area rug",a living room area;a small window;a white couch;a large table;a large area rug,area;window;couch;table;rug
+611,611,a small kitten is lying on the seat of a large motorcycle,a small kitten;the seat;a large motorcycle,kitten;seat;motorcycle
+612,612,a large kitten is lying on the seat of a small motorcycle,a large kitten;the seat;a small motorcycle,kitten;seat;motorcycle
+613,613,a bathroom with a large tub layered in small green tile,a bathroom;a large tub;small green tile,bathroom;tub;tile
+614,614,a bathroom with a small tub layered in large green tile,a bathroom;a small tub;large green tile,bathroom;tub;tile
+615,615,a helicopter and small plane fly through the air over the ocean and a large boat,a helicopter;small plane;the air;the ocean;a large boat,helicopter;plane;air;ocean;boat
+616,616,a helicopter and large plane fly through the air over the ocean and a small boat,a helicopter;large plane;the air;the ocean;a small boat,helicopter;plane;air;ocean;boat
+617,617,a large mirror behind a sink and toilet in a small bathroom,a large mirror;a sink and toilet;a small bathroom,mirror;toilet;bathroom
+618,618,a small mirror behind a sink and toilet in a large bathroom,a small mirror;a sink and toilet;a large bathroom,mirror;toilet;bathroom
+619,619,a large screen tv in a small bedroom,a large screen tv;a small bedroom,tv;bedroom
+620,620,a small screen tv in a large bedroom,a small screen tv;a large bedroom,tv;bedroom
+621,621,the small kitchen has large cabinets and two stoves,the small kitchen;large cabinets;two stoves,kitchen;cabinets;stoves
+622,622,the large kitchen has small cabinets and two stoves,the large kitchen;small cabinets;two stoves,kitchen;cabinets;stoves
+623,623,a large tall building with a small bird flying over the top,a large tall building;a small bird;the top,building;bird;top
+624,624,a small tall building with a large bird flying over the top,a small tall building;a large bird;the top,building;bird;top
+625,625,two large giraffes and a small giraffe standing in tall grass,two large giraffes;a small giraffe;tall grass,giraffes;giraffe;grass
+626,626,two small giraffes and a large giraffe standing in tall grassfour planes fly close through the sky with three trailing smoke behind them,two small giraffes;a large giraffe;tall grassfour planes;the sky;three trailing smoke,giraffes;giraffe;planes;sky;smoke
+627,627,three planes fly close through the sky with four trailing smoke behind them,three planes;the sky;four trailing smoke,planes;sky;smoke
+628,628,three adults and one child skiing on a snow covered ski slope,three adults;one child;a snow;ski slope,adults;child;snow;slope
+629,629,one adults and three child skiing on a snow covered ski slope,one adults;three child skiing;a snow;ski slope,adults;skiing;snow;slope
+630,630,three giraffes two are bending over and  you can not see their heads and one in the center is tall and lanky,three giraffes;their heads;the center,giraffes;heads;center
+631,631,three giraffes one are bending over and you can not see their heads and two in the center is tall and lanky,three giraffes;their heads;the center,giraffes;heads;center
+632,632,two green and one grey parrot perched on a branch,two green and one grey parrot;a branch,parrot;branch
+633,633,one green and two grey parrot perched on a branch,one green and two grey parrot;a branch,parrot;branch
+634,634,a five eleven sign and a pole with two signs,a five eleven sign;a pole;two signs,sign;pole;signs
+635,635,a two eleven sign and a pole with five signs,a two eleven sign;a pole;five signs,sign;pole;signs

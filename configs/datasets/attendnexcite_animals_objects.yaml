@@ -1,0 +1,12 @@
+baselines:
+- ./configs/models/sd-1-5.yaml
+- ./configs/models/composable.yaml
+- ./configs/models/attend_and_excite.yaml
+- ./configs/models/structure.yaml
+- ./configs/models/syngen.yaml
+dataset: /mnt/ssd2t/projects/ConceptGuidance/Concept-Diffusion/data/attendnexcite_animals_objects.csv
+seed:
+- 779
+- 464
+- 406
+- 149

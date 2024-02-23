@@ -25,8 +25,32 @@ python -m run configs/exp/example.yaml
 ```
 
 ## Evaluation
+## Prerequisites
+- `clean-fid==0.1.35`
+- Clone `https://github.com/mjsh34/T2I-CompBench`, install requirements (in a separate environment).
 
-자동으로 계산 가능한 코드 작성 부탁..
+To see all options for evaluation run `python eval.py --help`.
+
+Evaluate single dataset (specified in `./configs/exp/example.yaml`) on `fid`, `blip-vqa`, `clipscore` and `unidet` metrics:
+``` sh
+python eval.py \
+	--config ./configs/exp/example.yaml \
+	--methods fid blip-vqa clipscore unidet \
+	--t2i_compbench_path /path/to/T2I-CompBench/ \
+    --t2i_compbench_pyexe /path/to/T2I-CompBench/venv/bin/python \
+	--fid_ref_images_dir /path/to/coco/
+```
+
+Evaluate datasets (specified in configs inside `./configs/datasets/`) on `fid`, `blip-vqa`, `clipscore` and `unidet` metrics:
+``` sh
+python eval.py \
+	--config ./configs/datasets/ \
+	--methods fid blip-vqa clipscore unidet \
+	--t2i_compbench_path /path/to/T2I-CompBench/ \
+    --t2i_compbench_pyexe /path/to/T2I-CompBench/venv/bin/python \
+	--fid_ref_images_dir /path/to/coco/
+```
+
 <!-- # Concept-Diffusion
 
 > Hyun Kang, Dohae Lee, Myungjin Shin, In-Kwon Lee
