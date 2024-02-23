@@ -4,7 +4,10 @@ from typing import Literal
 import logging
 import torch as th
 import torch.nn as nn
-from diffusers.models.cross_attention import CrossAttention
+try:
+    from diffusers.models.cross_attention import CrossAttention
+except:  # Newer diffusers versions
+    from diffusers.models.attention import Attention as CrossAttention
 from typing import Optional, Tuple
 
 

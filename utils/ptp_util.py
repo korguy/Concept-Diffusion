@@ -4,7 +4,10 @@ import numpy as np
 import torch 
 from typing import Union, Tuple, List
 
-from diffusers.models.cross_attention import CrossAttention
+try:
+    from diffusers.models.cross_attention import CrossAttention
+except:  # Newer diffusers versions
+    from diffusers.models.attention import Attention as CrossAttention
 
 import warnings
 warnings.filterwarnings("ignore")

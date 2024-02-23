@@ -4,7 +4,15 @@ from dataclasses import dataclass
 from typing import List, Optional, Union, Dict
 
 import numpy as np
-import stanza
+
+try:
+    import stanza
+except AttributeError:  # awkward interaction with comfyui
+    import sys
+    oldstderr = sys.stderr
+    sys.stderr = None
+    import stanza
+    sys.stderr = oldstderr
 from nltk.tree import Tree
 import torch
 from diffusers.models import AutoencoderKL, UNet2DConditionModel
@@ -15,7 +23,10 @@ from diffusers.pipelines.stable_diffusion import (
 )
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
 from transformers.tokenization_utils import BatchEncoding
-from utils.structure_util import *
+try:
+    from utils.structure_util import *
+except ImportError:  # For comfyui
+    from ..utils.structure_util import *
 
 @dataclass
 class Span(object):
