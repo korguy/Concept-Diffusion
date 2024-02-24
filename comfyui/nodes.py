@@ -284,7 +284,8 @@ class BuildPipeline_AttendAndExcite(BuildPipelineBase):
     RETURN_NAMES = ("pipeline", "attention_store")
 
     def build_pipeline_fun(self, config, name, version, scheduler, **opts):
-        pipe = model_dict[self.MODEL_NAME].from_pretrained(version).to(device)
+        with torch.inference_mode(False):
+            pipe = model_dict[self.MODEL_NAME].from_pretrained(version).to(device)
         attention_store = AttentionStore() 
         register_attention_control(pipe, attention_store)
 
@@ -379,7 +380,7 @@ class GenerateImage_AttendAndExcite(GenerateImageBase):
     def get_images(self, pipeline, sampler_params, prompt, seed, **opts) -> typing.List[Image.Image]:
         nouns = json.loads(opts['nouns'])
         attention_store = opts['attention_store']
-        print("{} - nouns (#={}): {}".format(self.__class__.__name__, len(nouns), nouns))
+        print("{} - nouns (#={}):  {}".format(self.__class__.__name__, len(nouns), nouns))
         token_indices = pipeline.get_indices(prompt)
         indices_to_alter = []
         for n in nouns:
@@ -388,21 +389,23 @@ class GenerateImage_AttendAndExcite(GenerateImageBase):
             except:
                 continue
 
-        if 'thresholds' in sampler_params:
-            th_str = sampler_params['thresholds']
+        if isinstance(th_str := sampler_params.get('thresholds', None), str):
             if not th_str.startswith("{"):  # Curly braces are stripped for some reason?
                 th_str = "{" + th_str + "}"
-            sampler_params['thresholds'] = json.loads(th_str)
+            sampler_params['thresholds'] = {int(k): v for k, v in json.loads(th_str).items()}
 
-        return pipeline(
-                prompt=prompt,
-                attention_store=attention_store,
-                indices_to_alter=indices_to_alter,
-                generator=self._g(seed),
-                **{**sampler_params,
-                   'return_dict': True,
-                   'output_type': 'pil'}
-            ).images
+        with torch.inference_mode(False):
+            pipeline.unet.train()
+            images = pipeline(
+                    prompt=prompt,
+                    attention_store=attention_store,
+                    indices_to_alter=indices_to_alter,
+                    generator=self._g(seed),
+                    **{**sampler_params,
+                       'return_dict': True,
+                       'output_type': 'pil'}
+                ).images
+        return images
 
 
 node_classes = [
