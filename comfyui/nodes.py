@@ -489,7 +489,7 @@ class ExtractNounsForAttendAndExcite:
         return {
             "required": {
                 "prompt": ("STRING", {"multiline": True}),
-                "do_extract_nouns_on_exec": ("BOOLEAN", {"default": True}),
+                "do_override_nouns_on_exec": ("BOOLEAN", {"default": True}),
                 "nouns_list": ("STRING", {
                         "extracted_nouns_json": True,
                         "multiline": True,
@@ -504,9 +504,9 @@ class ExtractNounsForAttendAndExcite:
     RETURN_NAMES = ("nouns_list", )
 
     FUNCTION = "extract_nouns_fun"
-    def extract_nouns_fun(self, prompt, do_extract_nouns_on_exec: bool, nouns_list: str, unique_id=None):
+    def extract_nouns_fun(self, prompt, do_override_nouns_on_exec: bool, nouns_list: str, unique_id=None):
         nouns = None # List[str]
-        if do_extract_nouns_on_exec:
+        if do_override_nouns_on_exec:
             if self.nlp is None:
                 self.nlp = nlp_for_extract_nouns
             nouns = extract_nouns(prompt or "", nlp=self.nlp)
@@ -525,8 +525,8 @@ class ExtractNounsForAttendAndExcite:
         return (json.dumps(nouns), )
 
     #@classmethod
-    #def VALIDATE_INPUTS(clazz, prompt, do_extract_nouns_on_exec: bool, nouns_list: str):
-    #    if not do_extract_nouns_on_exec:
+    #def VALIDATE_INPUTS(clazz, prompt, do_override_nouns_on_exec: bool, nouns_list: str):
+    #    if not do_override_nouns_on_exec:
     #        try:
     #            json.loads(nouns_list)
     #        except JSONDecodeError:

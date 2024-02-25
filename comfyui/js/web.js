@@ -108,12 +108,16 @@ app.registerExtension({
                         console.assert(typeof i === 'string' || i instanceof String);
                         promptText = i;
                     }
-                    return promptText;
+                    return promptText ?? null;
                 }
 
                 async function extractNouns() {
                     const body = new FormData();
                     const promptVal = await getPrompt();
+                    if (promptVal === null) {
+                        alert("Unable to fetch prompt");
+                        return;
+                    }
                     body.append("prompt", promptVal);
                     const resp = await api.fetchApi("/concept-guidance/extract-nouns", {
                         method: "POST",
