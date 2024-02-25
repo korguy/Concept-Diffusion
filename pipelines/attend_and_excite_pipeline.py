@@ -457,6 +457,10 @@ class AttendAndExcitePipeline(StableDiffusionPipeline):
             (nsfw) content, according to the `safety_checker`.
             :type attention_store: object
         """
+        if not run_standard_sd and len(indices_to_alter) == 0:
+            print("No noun found (len(indices_to_alter) == 0). Running standard sd")
+            run_standard_sd = True
+
         # 0. Default height and width to unet
         height = height or self.unet.config.sample_size * self.vae_scale_factor
         width = width or self.unet.config.sample_size * self.vae_scale_factor
