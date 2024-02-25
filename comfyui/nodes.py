@@ -1,4 +1,6 @@
 from .common import CONFIGS_DIR, extract_nouns, nlp_for_extract_nouns
+from server import PromptServer
+
 from ..pipelines import model_dict
 from ..utils.ptp_util import AttentionStore, register_attention_control
 
@@ -492,33 +494,44 @@ class ExtractNounsForAttendAndExcite:
                         "extracted_nouns_json": True,
                         "multiline": True,
                     }),
-            }
+            },
+            "hidden": {
+                "unique_id": "UNIQUE_ID",
+            },
         }
 
     RETURN_TYPES = ("STRING", )
     RETURN_NAMES = ("nouns_list", )
 
     FUNCTION = "extract_nouns_fun"
-    def extract_nouns_fun(self, prompt, do_extract_nouns_on_exec: bool, nouns_list: str):
+    def extract_nouns_fun(self, prompt, do_extract_nouns_on_exec: bool, nouns_list: str, unique_id=None):
         nouns = None # List[str]
         if do_extract_nouns_on_exec:
             if self.nlp is None:
                 self.nlp = nlp_for_extract_nouns
             nouns = extract_nouns(prompt or "", nlp=self.nlp)
+
+            # Display extracted nouns
+            if unique_id:
+                msg_d = {
+                    "unique_id": unique_id,
+                    "nouns": nouns,
+                }
+                PromptServer.instance.send_sync("cgmsg-ane-display-extracted-nouns", msg_d)
         else:
             nouns = json.loads(nouns_list)
-
         nouns = list(map(str, nouns))
+
         return (json.dumps(nouns), )
 
-    @classmethod
-    def VALIDATE_INPUTS(clazz, prompt, do_extract_nouns_on_exec: bool, nouns_list: str):
-        if not do_extract_nouns_on_exec:
-            try:
-                json.loads(nouns_list)
-            except JSONDecodeError:
-                return "Given nouns_list '{}' is not a proper JSON list.".format(nouns_list)
-        return True
+    #@classmethod
+    #def VALIDATE_INPUTS(clazz, prompt, do_extract_nouns_on_exec: bool, nouns_list: str):
+    #    if not do_extract_nouns_on_exec:
+    #        try:
+    #            json.loads(nouns_list)
+    #        except JSONDecodeError:
+    #            return "Given nouns_list '{}' is not a proper JSON list.".format(nouns_list)
+    #    return True
 
     @classmethod
     def get_node_display_name(clazz):

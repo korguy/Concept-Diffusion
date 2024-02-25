@@ -2,6 +2,18 @@ import { app } from "../../../../scripts/app.js";
 import { api } from "../../../../scripts/api.js";
 
 
+function handleMsg_AnEDisplayExtractedNouns(evt) {
+    const nodeId = evt.detail.unique_id;
+    const node = app.graph._nodes_by_id[nodeId];
+    const nounsListW = node?.widgets.find(w => w.name === "nouns_list");
+    if (nounsListW) {
+        const nouns = evt.detail.nouns ?? [];
+        nounsListW.value = JSON.stringify(nouns, null, 2);
+    }
+}
+
+api.addEventListener("cgmsg-ane-display-extracted-nouns", handleMsg_AnEDisplayExtractedNouns);
+
 app.registerExtension({
     name: "conceptguidance.web",
 
@@ -78,17 +90,30 @@ app.registerExtension({
             },
 
             EXTRACT_NOUNS(node, inputName, inputData, app) {
-                //const cb = node.callback;
-                const promptWidget = node.widgets.find(w => w.name === "prompt");
-                //promptWidget.callback = () => {
-                //    extractNouns();
-                //    if (cb)
-                //        return cb.apply(this, arguments);
-                //};
+                //const promptWidget = node.widgets.find(w => w.name === "prompt");
+                // Can't simply fetch promptWidget.value, because it might be an input connected to another node.
+                async function getPrompt() {
+                    const p = structuredClone(await app.graphToPrompt());
+                    const i = p.output[node.id].inputs["prompt"];
+                    let promptText = null;
+                    if (Array.isArray(i)) {
+                        const promptNodeId = i[0];
+                        promptText = p.output[promptNodeId].inputs?.['text'];
+                        if (promptText === undefined) {
+                            alert("Failed to fetch prompt text from input node 'prompt', "
+                                + `connected to node ${promptNodeId}, because it does not contain an input named 'text'.`);
+                            promptText = null;
+                        }
+                    } else {
+                        console.assert(typeof i === 'string' || i instanceof String);
+                        promptText = i;
+                    }
+                    return promptText;
+                }
 
                 async function extractNouns() {
                     const body = new FormData();
-                    const promptVal = promptWidget.value;
+                    const promptVal = await getPrompt();
                     body.append("prompt", promptVal);
                     const resp = await api.fetchApi("/concept-guidance/extract-nouns", {
                         method: "POST",
@@ -98,7 +123,7 @@ app.registerExtension({
                     if (resp.status === 200) {
                         const data = await resp.json();
                         console.log(`Received nouns: ${data.nouns}`);
-                        const nounsListAsStr = JSON.stringify(data.nouns, null, 2)
+                        const nounsListAsStr = JSON.stringify(data.nouns, null, 2);
 
                         const nounsListWidget = node.widgets.find(w => w.name === "nouns_list");
                         nounsListWidget.value = nounsListAsStr;
