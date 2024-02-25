@@ -3,46 +3,6 @@
   "last_link_id": 49,
   "nodes": [
     {
-      "id": 13,
-      "type": "ShowText|pysssss",
-      "pos": [
-        843,
-        1040
-      ],
-      "size": {
-        "0": 315,
-        "1": 76
-      },
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 9,
-          "widget": {
-            "name": "text"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        "",
-        "a green bench|a red car"
-      ]
-    },
-    {
       "id": 5,
       "type": "Text Multiline",
       "pos": [
@@ -127,50 +87,6 @@
         0,
         0,
         0
-      ]
-    },
-    {
-      "id": 12,
-      "type": "PreprocessPromptForComposable",
-      "pos": [
-        835,
-        931
-      ],
-      "size": {
-        "0": 352.79998779296875,
-        "1": 58
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "raw_prompt",
-          "type": "STRING",
-          "link": 8,
-          "widget": {
-            "name": "raw_prompt"
-          },
-          "slot_index": 0
-        }
-      ],
-      "outputs": [
-        {
-          "name": "composable_text",
-          "type": "STRING",
-          "links": [
-            9,
-            35
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreprocessPromptForComposable"
-      },
-      "widgets_values": [
-        ""
       ]
     },
     {
@@ -389,7 +305,7 @@
       },
       "widgets_values": [
         "",
-        1307,
+        1929,
         "randomize",
         "[]"
       ]
@@ -720,50 +636,9 @@
       },
       "widgets_values": [
         "",
-        40,
+        1007,
         "randomize"
       ]
-    },
-    {
-      "id": 38,
-      "type": "DisposePipelineWithSerialOut",
-      "pos": [
-        1393,
-        510
-      ],
-      "size": {
-        "0": 241.79998779296875,
-        "1": 46
-      },
-      "flags": {},
-      "order": 12,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "pipeline",
-          "type": "DIFFUSERS_PIPELINE",
-          "link": 44
-        },
-        {
-          "name": "after",
-          "type": "*",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "serial_out",
-          "type": "SERIES_CONNECTOR",
-          "links": [
-            45
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "DisposePipelineWithSerialOut"
-      }
     },
     {
       "id": 10,
@@ -833,81 +708,9 @@
       },
       "widgets_values": [
         "",
-        532,
+        1524,
         "randomize"
       ]
-    },
-    {
-      "id": 39,
-      "type": "DisposePipelineWithSerialOut",
-      "pos": [
-        1390,
-        1103
-      ],
-      "size": {
-        "0": 241.79998779296875,
-        "1": 46
-      },
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "pipeline",
-          "type": "DIFFUSERS_PIPELINE",
-          "link": 46
-        },
-        {
-          "name": "after",
-          "type": "*",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "serial_out",
-          "type": "SERIES_CONNECTOR",
-          "links": [
-            47
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "DisposePipelineWithSerialOut"
-      }
-    },
-    {
-      "id": 41,
-      "type": "DisposePipeline",
-      "pos": [
-        1403,
-        1773
-      ],
-      "size": {
-        "0": 210,
-        "1": 46
-      },
-      "flags": {},
-      "order": 20,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "pipeline",
-          "type": "DIFFUSERS_PIPELINE",
-          "link": 49,
-          "slot_index": 0
-        },
-        {
-          "name": "after",
-          "type": "*",
-          "link": null
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "DisposePipeline"
-      }
     },
     {
       "id": 18,
@@ -950,9 +753,206 @@
       "widgets_values": [
         "a cat and a dog and a cat",
         true,
-        "",
+        "[\n  \"bench\",\n  \"car\"\n]",
         null
       ]
+    },
+    {
+      "id": 38,
+      "type": "DisposePipelineWithSerialOut",
+      "pos": [
+        1087,
+        525
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipeline",
+          "type": "DIFFUSERS_PIPELINE",
+          "link": 44
+        },
+        {
+          "name": "after",
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "serial_out",
+          "type": "SERIES_CONNECTOR",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DisposePipelineWithSerialOut"
+      }
+    },
+    {
+      "id": 39,
+      "type": "DisposePipelineWithSerialOut",
+      "pos": [
+        1108,
+        1111
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipeline",
+          "type": "DIFFUSERS_PIPELINE",
+          "link": 46
+        },
+        {
+          "name": "after",
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "serial_out",
+          "type": "SERIES_CONNECTOR",
+          "links": [
+            47
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DisposePipelineWithSerialOut"
+      }
+    },
+    {
+      "id": 12,
+      "type": "PreprocessPromptForComposable",
+      "pos": [
+        835,
+        904
+      ],
+      "size": {
+        "0": 352.79998779296875,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "raw_prompt",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "raw_prompt"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "composable_text",
+          "type": "STRING",
+          "links": [
+            9,
+            35
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreprocessPromptForComposable"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 13,
+      "type": "ShowText|pysssss",
+      "pos": [
+        854,
+        996
+      ],
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 9,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "a green bench|a red car"
+      ]
+    },
+    {
+      "id": 41,
+      "type": "DisposePipeline",
+      "pos": [
+        1113,
+        1834
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipeline",
+          "type": "DIFFUSERS_PIPELINE",
+          "link": 49,
+          "slot_index": 0
+        },
+        {
+          "name": "after",
+          "type": "*",
+          "link": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DisposePipeline"
+      }
     }
   ],
   "links": [
