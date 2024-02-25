@@ -23,6 +23,7 @@ SCHEDULERS = ("ddim", "pndm", "ddpm")
 
 PIPELINE_TYPENAME = "DIFFUSERS_PIPELINE"
 PARAMSDICT_TYPENAME = "SAMPLER_PARAMS"
+EXECINSERIES_TYPENAME = "SERIES_CONNECTOR"
 
 CATEGORY_BASE = "Concept Guidance"
 
@@ -37,6 +38,10 @@ MODEL_NAME_ATTEND_AND_EXCITE = "attend_and_excite"
 MODEL_DISPLAY_NAME_STABLE_DIFFUSION = "Stable Diffusion"
 MODEL_DISPLAY_NAME_COMPOSABLE_DIFFUSION = "Composable Diffusion"
 MODEL_DISPLAY_NAME_ATTEND_AND_EXCITE = "Attend and Excite"
+
+
+def randomseed():
+    return random.randint(0, 0xffffffffffffffff)
 
 
 class PipelineDecorator:
@@ -93,6 +98,7 @@ class BuildPipelineBase(ABC):
             "optional": {
                 # If this is checked, executing this node will just del the cached pipeline and return nothing
                 "dispose_pipeline": ("BOOLEAN", {"default": False}),
+                "series_in": (EXECINSERIES_TYPENAME, {}), #{"forceInput": True}),
             },
             "hidden": {
                 "node_id": "UNIQUE_ID",
@@ -274,7 +280,7 @@ class GenerateImageBase(ABC):
 
     @classmethod
     def _g(clazz, seed):
-        return torch.Generator(device).manual_seed(seed if seed >= 0 else random.randint())
+        return torch.Generator(device).manual_seed(seed if seed >= 0 else randomseed())
 
     @classmethod
     def get_node_display_name(clazz):
@@ -333,6 +339,21 @@ class DisposePipeline:
     @classmethod
     def get_node_display_name(clazz):
         return "Dispose Pipeline"
+
+
+class DisposePipelineWithSerialOut(DisposePipeline):
+    RETURN_TYPES = (EXECINSERIES_TYPENAME, )
+    RETURN_NAMES = ("serial_out", )
+
+    OUTPUT_NODE = False
+
+    def dispose_pipeline(self, pipeline, after=None, **opts):
+        super().dispose_pipeline(pipeline, after=after, **opts)
+        return (randomseed(), )
+
+    @classmethod
+    def get_node_display_name(clazz):
+        return "Dispose Pipeline (SO)"
 
 
 class BuildPipeline_StableDiffusion(BuildPipelineBase):
@@ -565,6 +586,7 @@ node_classes = [
         ExtractNounsForAttendAndExcite,
 
         DisposePipeline,
+        DisposePipelineWithSerialOut,
 ]
 
 get_node_identifier = lambda clazz: clazz.__name__
