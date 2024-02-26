@@ -36,10 +36,12 @@ print("Device: {}".format(device))
 MODEL_NAME_STABLE_DIFFUSION = "stable_diffusion"
 MODEL_NAME_COMPOSABLE_DIFFUSION = "composable_diffusion"
 MODEL_NAME_ATTEND_AND_EXCITE = "attend_and_excite"
+MODEL_NAME_STRUCTURED_DIFFUSION = "structure_diffusion"
 
 MODEL_DISPLAY_NAME_STABLE_DIFFUSION = "Stable Diffusion"
 MODEL_DISPLAY_NAME_COMPOSABLE_DIFFUSION = "Composable Diffusion"
 MODEL_DISPLAY_NAME_ATTEND_AND_EXCITE = "Attend and Excite"
+MODEL_DISPLAY_NAME_STRUCTURED_DIFFUSION = "Structured Diffusion"
 
 
 def randomseed():
@@ -368,13 +370,11 @@ class LoadParams_StableDiffusion(LoadParamsBase):
     MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_STABLE_DIFFUSION
 
     @classmethod
-    def INPUT_TYPES(clazz):
+    def _get_required_input_types(clazz):
         return {
-            "required": clazz._get_required_input_types(),
-            "optional": {
-                "param_eta": ("FLOAT", {"default": 0.0}),
-                "param_guidance_rescale": ("FLOAT", {"default": 0.0}),
-            }
+            **super(clazz, clazz)._get_required_input_types(),
+            "param_eta": ("FLOAT", {"default": 0.0}),
+            "param_guidance_rescale": ("FLOAT", {"default": 0.0}),
         }
 
 
@@ -393,13 +393,11 @@ class LoadParams_ComposableDiffusion(LoadParamsBase):
     MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_COMPOSABLE_DIFFUSION
 
     @classmethod
-    def INPUT_TYPES(clazz):
+    def _get_required_input_types(clazz):
         return {
-            "required": clazz._get_required_input_types(),
-            "optional": {
-                "param_eta": ("FLOAT", {"default": 0.0}),
-                "param_guidance_rescale": ("FLOAT", {"default": 0.0}),
-            }
+            **super(clazz, clazz)._get_required_input_types(),
+            "param_eta": ("FLOAT", {"default": 0.0}),
+            "param_guidance_rescale": ("FLOAT", {"default": 0.0}),
         }
 
 
@@ -582,18 +580,47 @@ class GenerateImage_AttendAndExcite(GenerateImageBase):
         return images
 
 
+class LoadParams_StructuredDiffusion(LoadParamsBase):
+    MODEL_NAME = MODEL_NAME_STRUCTURED_DIFFUSION
+    MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_STRUCTURED_DIFFUSION
+
+    @classmethod
+    def _get_required_input_types(clazz):
+        return {
+            **super(clazz, clazz)._get_required_input_types(),
+            "param_struct_attention": (["extend_str", "extend_seq", "align_seq", "none"], {
+                    "default": "align_seq",
+                }),
+            "param_eta": ("FLOAT", {"default": 0.0}),
+            "param_guidance_rescale": ("FLOAT", {"default": 0.0}),
+        }
+
+
+class BuildPipeline_StructuredDiffusion(BuildPipelineBase):
+    MODEL_NAME = MODEL_NAME_STRUCTURED_DIFFUSION
+    MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_STRUCTURED_DIFFUSION
+
+
+class GenerateImage_StructuredDiffusion(GenerateImageBase):
+    MODEL_NAME = MODEL_NAME_STRUCTURED_DIFFUSION
+    MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_STRUCTURED_DIFFUSION
+
+
 node_classes = [
         BuildPipeline_StableDiffusion,
         BuildPipeline_ComposableDiffusion,
         BuildPipeline_AttendAndExcite,
+        BuildPipeline_StructuredDiffusion,
 
         LoadParams_StableDiffusion,
         LoadParams_ComposableDiffusion,
         LoadParams_AttendAndExcite,
+        LoadParams_StructuredDiffusion,
 
         GenerateImage_StableDiffusion,
         GenerateImage_ComposableDiffusion,
         GenerateImage_AttendAndExcite,
+        GenerateImage_StructuredDiffusion,
 
         PreprocessPromptForComposable,
         ExtractNounsForAttendAndExcite,
