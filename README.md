@@ -52,6 +52,11 @@ python eval.py \
 
 To see all options for evaluation run `python eval.py --help`.
 
+## [ComfyUI](https://github.com/comfyanonymous/ComfyUI) Extension
+[![Running all models](http://img.youtube.com/vi/6MWwbUQxhbo/0.jpg)](https://youtu.be/6MWwbUQxhbo?t=0s)
+
+[![Run a single model](http://img.youtube.com/vi/UrCOpXkb8Mg/0.jpg)](https://youtu.be/UrCOpXkb8Mg?t=0s)
+
 <!-- # Concept-Diffusion
 
 > Hyun Kang, Dohae Lee, Myungjin Shin, In-Kwon Lee
