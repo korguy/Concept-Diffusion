@@ -37,11 +37,13 @@ MODEL_NAME_STABLE_DIFFUSION = "stable_diffusion"
 MODEL_NAME_COMPOSABLE_DIFFUSION = "composable_diffusion"
 MODEL_NAME_ATTEND_AND_EXCITE = "attend_and_excite"
 MODEL_NAME_STRUCTURED_DIFFUSION = "structure_diffusion"
+MODEL_NAME_SYNGEN = "syntax_guided_generation"
 
 MODEL_DISPLAY_NAME_STABLE_DIFFUSION = "Stable Diffusion"
 MODEL_DISPLAY_NAME_COMPOSABLE_DIFFUSION = "Composable Diffusion"
 MODEL_DISPLAY_NAME_ATTEND_AND_EXCITE = "Attend and Excite"
 MODEL_DISPLAY_NAME_STRUCTURED_DIFFUSION = "Structured Diffusion"
+MODEL_DISPLAY_NAME_SYNGEN = "SynGen"
 
 
 def randomseed():
@@ -102,7 +104,7 @@ class BuildPipelineBase(ABC):
             "optional": {
                 # If this is checked, executing this node will just del the cached pipeline and return nothing
                 "dispose_pipeline": ("BOOLEAN", {"default": False}),
-                "series_in": (EXECINSERIES_TYPENAME, {}), #{"forceInput": True}),
+                "serial_in": (EXECINSERIES_TYPENAME, {}), #{"forceInput": True}),
             },
             "hidden": {
                 "node_id": "UNIQUE_ID",
@@ -440,7 +442,6 @@ class BuildPipeline_AttendAndExcite(BuildPipelineBase):
     MODEL_NAME = MODEL_NAME_ATTEND_AND_EXCITE
     MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_ATTEND_AND_EXCITE
 
-
     def get_pipeline(self, config, name, version, scheduler, **opts):
         with torch.inference_mode(False):
             pipe = model_dict[self.MODEL_NAME].from_pretrained(version).to(device)
@@ -606,21 +607,54 @@ class GenerateImage_StructuredDiffusion(GenerateImageBase):
     MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_STRUCTURED_DIFFUSION
 
 
+class LoadParams_SynGen(LoadParamsBase):
+    MODEL_NAME = MODEL_NAME_SYNGEN
+    MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_SYNGEN
+    
+    # TODO add more parameters
+
+
+class BuildPipeline_SynGen(BuildPipelineBase):
+    MODEL_NAME = MODEL_NAME_SYNGEN
+    MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_SYNGEN
+
+    def get_pipeline(self, config, name, version, scheduler, **opts):
+        with torch.inference_mode(False):
+            pipe = model_dict[self.MODEL_NAME].from_pretrained(version).to(device)
+        extra = {}
+        if node_id := opts.get('node_id'):
+            extra['node_id'] = node_id
+        extra['dispose_pipeline_fun'] = self.dispose_pipeline
+        return PipelineDecorator(pipe, **extra)
+
+
+class GenerateImage_SynGen(GenerateImageBase):
+    MODEL_NAME = MODEL_NAME_SYNGEN
+    MODEL_DISPLAY_NAME = MODEL_DISPLAY_NAME_SYNGEN
+
+    def get_images(self, *a, **kw) -> typing.List[Image.Image]:
+        with torch.inference_mode(False):
+            return super().get_images(*a, **kw)
+
+
 node_classes = [
         BuildPipeline_StableDiffusion,
         BuildPipeline_ComposableDiffusion,
         BuildPipeline_AttendAndExcite,
         BuildPipeline_StructuredDiffusion,
+        BuildPipeline_SynGen,
 
         LoadParams_StableDiffusion,
         LoadParams_ComposableDiffusion,
         LoadParams_AttendAndExcite,
         LoadParams_StructuredDiffusion,
+        LoadParams_SynGen,
 
         GenerateImage_StableDiffusion,
         GenerateImage_ComposableDiffusion,
         GenerateImage_AttendAndExcite,
         GenerateImage_StructuredDiffusion,
+        GenerateImage_SynGen,
 
         PreprocessPromptForComposable,
         ExtractNounsForAttendAndExcite,
