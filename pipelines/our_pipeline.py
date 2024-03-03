@@ -3,6 +3,8 @@ from typing import Any, Callable, Dict, List, Optional, Union
 import torch
 import warnings
 warnings.filterwarnings("ignore")
+import torch.distributions as dist
+import numpy as np
 
 from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import StableDiffusionPipeline
@@ -10,6 +12,23 @@ from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import Stabl
 def get_perpendicular_component(x, y):
 	assert x.shape == y.shape
 	return x - ((torch.mul(x, y).sum())/(torch.norm(y)**2)) * y
+
+def get_overlapping_component(x, y):
+	assert x.shape == y.shape
+	return ((torch.mul(x, y).sum())/(torch.norm(y)**2)) * y
+
+def extract_concept(score, th=0.9):
+	tmp = torch.quantile(torch.abs(score).flatten(start_dim=2),
+								th,
+								dim=2,
+								keepdim=False
+							)
+	score = torch.where(
+		torch.abs(score) >= tmp[:, :, None, None],
+		score,
+		torch.zeros_like(score)
+	)
+	return score
 
 class OurPipeline(StableDiffusionPipeline):
 	def _encode_prompt(
@@ -55,6 +74,9 @@ class OurPipeline(StableDiffusionPipeline):
 				attention_mask = text_inputs.attention_mask.to(device)
 			else:
 				attention_mask = None
+
+			attention_mask = None
+			# attention_mask = text_inputs.attention_mask.to(device)
 
 			ids = text_inputs.input_ids[-1]
 			tokens = torch.masked_select(ids, text_inputs.attention_mask[-1].bool())
@@ -111,6 +133,7 @@ class OurPipeline(StableDiffusionPipeline):
 				attention_mask = uncond_input.attention_mask.to(device)
 			else:
 				attention_mask = None
+			# attention_mask = uncond_input.attention_mask.to(device)
 
 			negative_prompt_embeds = self.text_encoder(
 				uncond_input.input_ids.to(device),
@@ -134,6 +157,50 @@ class OurPipeline(StableDiffusionPipeline):
 
 		return tokens, prompt_embeds
 
+	@staticmethod
+	def _update_latent(latents, loss, step_size):
+		grad_cond = torch.autograd.grad(loss.requires_grad_(True), [latents], retain_graph=True)[0]
+		latents = latents - step_size * grad_cond
+		return latents
+
+	def _ours_step(self, latent_model_input, prompt_embeds, t, i):
+		noise_pred = []
+		for j in range(prompt_embeds.size(0)):
+			latent = latent_model_input.clone()
+			_noise_pred = self.unet(
+				latent,t,encoder_hidden_states=prompt_embeds[j][None]
+				)[0]
+			noise_pred.append(_noise_pred)
+		noise_pred = torch.cat(noise_pred, dim=0)
+		return noise_pred
+
+	def plot_similarities(self, name):
+		import matplotlib.pyplot as plt
+		import seaborn as sns
+
+		cosine = np.array(self.sim).transpose()
+
+		sns.set_style('darkgrid')
+		plt.rc('axes', titlesize=18)     # fontsize of the axes title
+		plt.rc('axes', labelsize=14)    # fontsize of the x and y labels
+		plt.rc('xtick', labelsize=13)    # fontsize of the tick labels
+		plt.rc('ytick', labelsize=13)    # fontsize of the tick labels
+		plt.rc('legend', fontsize=13)    # legend fontsize
+		plt.rc('font', size=13)
+
+		plt.figure(figsize=(8,8), tight_layout=True)
+		for i in range(len(self.nps)+1):
+			plt.plot(list(range(cosine.shape[1])), cosine[i], 'o-', color=sns.color_palette('pastel')[i+1])
+
+		plt.legend(
+			title='Concept', title_fontsize = 13,
+			labels=self.nps + ["abstract"]
+		)
+		plt.xlabel("Timesteps")
+		plt.ylabel("Cosine Similarity")
+		plt.savefig(name)
+
+
 	@torch.no_grad()
 	def __call__(
 		self,
@@ -143,6 +210,7 @@ class OurPipeline(StableDiffusionPipeline):
 		width: Optional[int] = None,
 		num_inference_steps: int = 50,
 		guidance_scale: float = 7.5,
+		concept_guidance_scale: float = 5.5,
 		negative_prompt: Optional[Union[str, List[str]]] = None,
 		num_images_per_prompt: Optional[int] = 1,
 		eta: float = 0.0,
@@ -155,6 +223,14 @@ class OurPipeline(StableDiffusionPipeline):
 		callback: Optional[Callable[[int, int, torch.FloatTensor], None]] = None,
 		callback_steps: int = 1,
 		cross_attention_kwargs: Optional[Dict[str, Any]] = None,
+		edit_momentum_scale=0.7,
+		edit_mom_beta=0.2,
+		subject_th = 0.5,
+		abstract_th = 0.5,
+		warmup = 10,
+		cooldown=20,
+		window = 1,
+		subject_percentile = 0.5,
 		**kwargs
 	):
 		height = height or self.unet.config.sample_size * self.vae_scale_factor
@@ -182,6 +258,9 @@ class OurPipeline(StableDiffusionPipeline):
 		) # prompt_embeds: [N, 77, 768]
 
 		self.tokens = tokens
+		self.nps = noun_phrases 
+
+		self.sim =[]
 
 		self.scheduler.set_timesteps(num_inference_steps, device=device)
 		timesteps = self.scheduler.timesteps
@@ -197,8 +276,7 @@ class OurPipeline(StableDiffusionPipeline):
 			generator,
 			latents,
 		)
-
-		# latents = torch.cat([latents] * len(prompt))
+		edit_momentum = None
 
 		extra_step_kwargs = self.prepare_extra_step_kwargs(generator, eta)
 		num_warmup_steps = len(timesteps) - num_inference_steps * self.scheduler.order
@@ -208,34 +286,51 @@ class OurPipeline(StableDiffusionPipeline):
 				latent_model_input = latents
 				latent_model_input = self.scheduler.scale_model_input(latent_model_input, t)
 
-				noise_pred = []
-				for i in range(len(prompt)):
-					_noise_pred = self.unet(
-						latent_model_input,
-						t,
-						encoder_hidden_states=prompt_embeds[i].unsqueeze(0),
-						cross_attention_kwargs=cross_attention_kwargs,
-						return_dict=False
-					)[0]
-					noise_pred.append(_noise_pred)
-				noise_pred = torch.cat(noise_pred, dim=0)
+				noise_pred = self._ours_step(latent_model_input, prompt_embeds, t, i)
 
-				if do_classifier_free_guidance:
-					noise_pred_uncond, noise_pred_text = noise_pred[:1], noise_pred[1][None]
-					noise_pred_concepts = noise_pred[2:]
+				noise_pred_uncond, noise_pred_text = noise_pred[0][None], noise_pred[-1][None]
+				noise_pred_concepts = noise_pred[1:-1]
 
-					prompt_score = (noise_pred_text-noise_pred_uncond)
-					subject_scores = (noise_pred_concepts - noise_pred_uncond)
-					abstract_score = get_perpendicular_component(prompt_score[0], torch.sum(subject_scores, dim=0))[None]
-					concept_scores = torch.cat([subject_scores, abstract_score], dim=0)
+				prompt_score = (noise_pred_text-noise_pred_uncond)
+				subject_scores = (noise_pred_concepts - noise_pred_uncond)
+				subject_scores = extract_concept(subject_scores, subject_percentile)
+				# abstract_score = get_perpendicular_component(extract_concept(prompt_score, 0.5)[0], torch.sum(subject_scores, dim=0))[None]
+				# abstract_score = get_perpendicular_component(prompt_score[0], torch.sum(subject_scores, dim=0))[None]
+				abstract_score = prompt_score[0]
+				for s in subject_scores:
+					abstract_score = get_perpendicular_component(abstract_score, s)
+				abstract_score = abstract_score.unsqueeze(0)
+				concept_scores = torch.cat([subject_scores, abstract_score], dim=0)
 
-					sim = torch.abs(torch.nn.functional.cosine_similarity(
-	                    prompt_score.reshape(1, -1), concept_scores.reshape(len(prompt)-1, -1)
-	                ))
-					print(sim)
+				sim = torch.abs(torch.nn.functional.cosine_similarity(
+					prompt_score.reshape(1, -1), concept_scores.reshape(len(prompt)-1, -1)
+				)).detach().cpu().numpy()
+				self.sim.append(sim)
 
-					noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_text - noise_pred_uncond)
-					noise_pred = noise_pred_uncond + guidance_scale * (concept_scores[2][None])
+				if edit_momentum is None:
+					edit_momentum = torch.zeros_like(concept_scores)
+
+				concept_guidance = 0
+				concept_guidance -= (prompt_score - abstract_score)[0] / concept_scores.size(0)
+				start = 0 if i < window else i - window 
+				for idx, concept_score in enumerate(concept_scores):
+					if idx != concept_scores.size(0):
+						_concept_guidance = get_perpendicular_component(concept_score, prompt_score[0]) + edit_momentum_scale * edit_momentum[idx]
+						# _concept_guidance = concept_score + edit_momentum_scale * edit_momentum[idx]
+						edit_momentum[idx] = edit_mom_beta * edit_momentum[idx] + (1 - edit_mom_beta) * _concept_guidance
+
+						if i > warmup and i < cooldown and np.mean(np.array(self.sim).transpose()[idx, start:i]) < subject_th:
+							concept_guidance += _concept_guidance 
+
+					else:
+						_concept_guidance = abstract_score + edit_momentum_scale * edit_momentum[idx]
+						edit_momentum[idx] = edit_mom_beta * edit_momentum[idx] + (1 - edit_mom_beta) * _concept_guidance
+
+						if i > warmup and i < cooldown and np.mean(np.array(self.sim).transpose()[idx, start:i]) < abstract_th:
+							concept_guidance += _concept_guidance 
+
+				noise_pred = noise_pred_uncond + guidance_scale * prompt_score \
+							+ concept_guidance_scale * concept_guidance 
 
 				latents = self.scheduler.step(noise_pred, t, latents, **extra_step_kwargs).prev_sample
 				
@@ -253,7 +348,7 @@ class OurPipeline(StableDiffusionPipeline):
 			image = self.decode_latents(latents)
 
 			# 9. Run safety checker
-			image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
+			# image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
 
 			# 10. Convert to PIL
 			image = self.numpy_to_pil(image)
@@ -262,7 +357,7 @@ class OurPipeline(StableDiffusionPipeline):
 			image = self.decode_latents(latents)
 
 			# 9. Run safety checker
-			image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
+			# image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
 
 		# Offload last model to CPU
 		if hasattr(self, "final_offload_hook") and self.final_offload_hook is not None:
@@ -271,33 +366,76 @@ class OurPipeline(StableDiffusionPipeline):
 		if not return_dict:
 			return (image, has_nsfw_concept)
 
-		return StableDiffusionPipelineOutput(images=image, nsfw_content_detected=has_nsfw_concept)
+		return StableDiffusionPipelineOutput(images=image, nsfw_content_detected=None)
 
 
 if __name__ == "__main__":
 	import yaml
-	from diffusers import DDIMScheduler
+	import os
+	from PIL import Image
+	from diffusers import DDIMScheduler, LMSDiscreteScheduler
 
 	from utils.util import *
 	from utils.ptp_util import AttentionStore
 	from utils.vis_util import visualize_cross_attention_map
+	from utils.data_util import load_data
+
+	from pipelines.stable_diffusion_pipeline import StableDiffusionPipeline
 
 	config = yaml.safe_load(open("configs/models/ours.yaml",'r'))
-
+	# config["params"]["num_inference_steps"] = 25
+	
 	scheduler = DDIMScheduler.from_pretrained(config["version"], subfolder="scheduler")
 	model = OurPipeline.from_pretrained(config["version"]).to("cuda")
+	# model.scheduler = scheduler
 
 	attention_store = AttentionStore()
 	register_attention_control(model, attention_store, None)
 
-	prompt = "a green backpack and a brown suitcase"
-	noun_phrases = ["a green backpack", "a brown suitcase"]
+	data = load_data("data/CC-500.csv", "ours")
 
-	seed = 42
-	g = torch.Generator("cuda").manual_seed(seed)
+	os.makedirs("tmp", exist_ok=True)
+	c = 0
+	for p in data[50:]:
+		prompt, nps = p
+		seed = np.random.randint(0,1000)
+		g = torch.Generator("cuda").manual_seed(seed)
+		img = model(prompt, nps, generator=g, **config["params"]).images[0]
+		img.save('tmp/tmp.png')
+		model.plot_similarities("tmp/tmp2.png")
+		del model
 
-	img = model(prompt, noun_phrases, generator=g, **config["params"]).images[0]
-	img.save('tmp.png')
+		model = StableDiffusionPipeline.from_pretrained(config["version"]).to("cuda")
+		g = torch.Generator("cuda").manual_seed(seed)
+		img = model(prompt=prompt, generator=g).images[0]
+		img.save('tmp/tmp0.png')
+		img0 = np.array(Image.open('tmp/tmp0.png'))
+
+		img = np.array(Image.open('tmp/tmp.png'))#.transpose(2,1,0)
+		graph = Image.open('tmp/tmp2.png')
+		graph = np.array(graph.resize((512,512)))[:,:,:3]#.transpose(2,1,0)[:3,:,:]
+		# print(img.shape, graph.shape)
+		Image.fromarray(np.hstack([img0,img, graph])).save(f'tmp/{seed}_{prompt}.png')
+		os.remove('tmp/tmp0.png')
+		os.remove('tmp/tmp.png')
+		os.remove('tmp/tmp2.png')
+		c+=1
+		if c == 5:
+			break
+
+	# prompt = "a brown bench and a green clock"
+	# noun_phrases = ["a brown bench", "a green clock"]
+	# # prompt = "a pink banana and a green cake"
+	# # noun_phrases = ["a pink banana", "a green cake"]
+
+	# seed = np.random.randint(0, 1000)
+	# seed = 153# 779 #464
+	# g = torch.Generator("cuda").manual_seed(seed)
+
+	# config["params"]["num_inference_steps"] = 25
+	# img = model(prompt, noun_phrases, generator=g, **config["params"]).images[0]
+	# img.save('tmp.png')
+	# model.plot_similarities("tmp3.png")
 	# visualize_cross_attention_map(attention_store, 
 	# 	img, 
 	# 	model.tokens, 

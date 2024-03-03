@@ -288,7 +288,7 @@ if __name__ == "__main__":
 	from utils.ptp_util import AttentionStore, register_attention_control
 	from utils.vis_util import visualize_cross_attention_map
 
-	config = yaml.safe_load(open("configs/models/sd-2-base.yaml", 'r'))
+	config = yaml.safe_load(open("configs/models/sd-1-5.yaml", 'r'))
 
 	scheduler = DDIMScheduler.from_pretrained(config["version"], subfolder="scheduler")
 	model = StableDiffusionPipeline.from_pretrained(config["version"], torch_dtype=torch.float16)
@@ -297,5 +297,7 @@ if __name__ == "__main__":
 	attention_store = AttentionStore()
 	register_attention_control(model, attention_store)
 
-	img = model(prompt="cat", **config['params']).images[0]
-	visualize_cross_attention_map(attention_store, img, model.tokens, out="tmp.png")
+	g = torch.Generator("cuda").manual_seed(735)
+	img = model(prompt="a green backpack and a blue banana", generator=g, **config['params']).images[0]
+	img.save('tmp.png')
+	# visualize_cross_attention_map(attention_store, img, model.tokens, out="tmp.png")

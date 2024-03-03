@@ -7,14 +7,23 @@ params:
   width: 512
   num_inference_steps: 50
   guidance_scale: 7.5
+  concept_guidance_scale: 7.5
+  subject_th: 0.6
+  abstract_th: 0.5
+  subject_percentile: 0.7
+  edit_momentum_scale: 0.5
+  edit_mom_beta: 0.4
+  warmup: 5
+  cooldown: 30
+  window: 5
 
 vis_option:
-  down:
-    level: [0]
-    head: 0
+  # down:
+  #   level: [0]
+  #   head: 0
   mid:
     level: [0]
     head: 0
-  up:
-    level: [0]
-    head: 0
+  # up:
+  #   level: [0]
+  #   head: 0

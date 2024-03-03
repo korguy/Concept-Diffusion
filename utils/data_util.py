@@ -2,7 +2,7 @@ import spacy
 import pandas as pd
 import numpy as np
 
-from diffusers import LMSDiscreteScheduler, DDIMScheduler, PNDMScheduler, DDPMScheduler
+from diffusers import LMSDiscreteScheduler, DDIMScheduler, PNDMScheduler, DDPMScheduler, LMSDiscreteScheduler
 
 def load_data(path, method, return_raw_prompts=False):
 	try:
@@ -38,5 +38,7 @@ def load_scheduler(name, version):
 		return PNDMScheduler.from_pretrained(version, subfolder="scheduler")
 	elif name == "ddpm":
 		return DDPMScheduler.from_pretrained(version, subfolder="scheduler")
+	elif name == "lms":
+		return LMSDiscreteScheduler.from_pretrained(version, subfolder="scheduler")
 	else:
 		raise NotImplementedError("Unsupported Scheduler")
