@@ -30,6 +30,15 @@ def load_data(path, method, return_raw_prompts=False):
 			nouns.append(_nouns)
 		del nlp
 		return (data["prompt"], nouns)
+	elif method == "ours":
+		prompts = []
+		nlp = spacy.load("en_core_web_sm")
+		for p in data["prompt"]:
+			doc = nlp(p)
+			noun_phrases = [chunk.text for chunk in doc.noun_chunks]
+			prompts.append((p, noun_phrases))
+		del nlp
+		return prompts
 
 def load_scheduler(name, version):
 	if name == "ddim":

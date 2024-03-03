@@ -1,9 +1,10 @@
 dataset: ./data/CC-500.csv
 seed: [779, 464, 406, 149]
 baselines: [
-  ./configs/models/sd-1-5.yaml,
-  ./configs/models/composable.yaml,
-  ./configs/models/attend_and_excite.yaml,
-  ./configs/models/structure.yaml,
-  ./configs/models/syngen.yaml
+  # ./configs/models/sd-1-5.yaml,
+  # ./configs/models/composable.yaml,
+  # ./configs/models/attend_and_excite.yaml,
+  # ./configs/models/structure.yaml,
+  # ./configs/models/syngen.yaml
+  ./configs/models/ours.yaml
 ]

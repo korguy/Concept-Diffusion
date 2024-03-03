@@ -17,7 +17,7 @@ def generate(baselines, seeds, dataset, out_dir):
 			os.makedirs(_out_dir, exist_ok=True)
 
 			model = model_dict[config["model"]].from_pretrained(config["version"]).to("cuda")
-			scheduler = load_scheduler(config["scheduler"], config["version"])
+			scheduler = load_scheduler(config["scheduler"], config["version"]) 
 			data = load_data(dataset, config["model"])
 
 			if config["model"] == "attend_and_excite":
@@ -41,6 +41,8 @@ def generate(baselines, seeds, dataset, out_dir):
 								indices_to_alter.append(token_indices[n])
 							except:
 								continue
+					if config["model"] == "ours":
+						prompt, nps = prompt
 
 					__out_dir = f"{_out_dir}/{idx}_{prompt[:50]}"
 					os.makedirs(__out_dir, exist_ok=True)
@@ -59,6 +61,13 @@ def generate(baselines, seeds, dataset, out_dir):
 										generator=g,
 										**config["params"]
 									).images[0]
+							elif config["model"] == "ours":
+								image = model(
+									prompt=prompt,
+									noun_phrases=nps,
+									generator=g,
+									**config["params"]
+								).images[0]
 							else:
 								image = model(
 										prompt=prompt,

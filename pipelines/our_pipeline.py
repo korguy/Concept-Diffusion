@@ -296,7 +296,7 @@ class OurPipeline(StableDiffusionPipeline):
 				subject_scores = extract_concept(subject_scores, subject_percentile)
 				# abstract_score = get_perpendicular_component(extract_concept(prompt_score, 0.5)[0], torch.sum(subject_scores, dim=0))[None]
 				# abstract_score = get_perpendicular_component(prompt_score[0], torch.sum(subject_scores, dim=0))[None]
-				abstract_score = prompt_score[0]
+				abstract_score = extract_concept(prompt_score, subject_percentile)[0]
 				for s in subject_scores:
 					abstract_score = get_perpendicular_component(abstract_score, s)
 				abstract_score = abstract_score.unsqueeze(0)
@@ -311,26 +311,26 @@ class OurPipeline(StableDiffusionPipeline):
 					edit_momentum = torch.zeros_like(concept_scores)
 
 				concept_guidance = 0
-				concept_guidance -= (prompt_score - abstract_score)[0] / concept_scores.size(0)
+				# concept_guidance -= (prompt_score - abstract_score)[0]
 				start = 0 if i < window else i - window 
 				for idx, concept_score in enumerate(concept_scores):
-					if idx != concept_scores.size(0):
-						_concept_guidance = get_perpendicular_component(concept_score, prompt_score[0]) + edit_momentum_scale * edit_momentum[idx]
-						# _concept_guidance = concept_score + edit_momentum_scale * edit_momentum[idx]
+					if idx != concept_scores.size(0)-1:
+						# _concept_guidance = get_perpendicular_component(concept_score, prompt_score[0]) + edit_momentum_scale * edit_momentum[idx]
+						_concept_guidance = concept_score + edit_momentum_scale * edit_momentum[idx]
 						edit_momentum[idx] = edit_mom_beta * edit_momentum[idx] + (1 - edit_mom_beta) * _concept_guidance
 
 						if i > warmup and i < cooldown and np.mean(np.array(self.sim).transpose()[idx, start:i]) < subject_th:
 							concept_guidance += _concept_guidance 
 
 					else:
-						_concept_guidance = abstract_score + edit_momentum_scale * edit_momentum[idx]
+						_concept_guidance = -1 * (prompt_score - abstract_score)[0] + 0 * edit_momentum[idx]#+ edit_momentum_scale * edit_momentum[idx]
 						edit_momentum[idx] = edit_mom_beta * edit_momentum[idx] + (1 - edit_mom_beta) * _concept_guidance
-
-						if i > warmup and i < cooldown and np.mean(np.array(self.sim).transpose()[idx, start:i]) < abstract_th:
+						if i > warmup and i < cooldown and np.mean(np.array(self.sim).transpose()[idx, start:i]) < abstract_th:							
 							concept_guidance += _concept_guidance 
 
 				noise_pred = noise_pred_uncond + guidance_scale * prompt_score \
 							+ concept_guidance_scale * concept_guidance 
+				# noise_pred = noise_pred_uncond + guidance_scale * torch.sum(concept_scores, dim=0, keepdim=True)#abstract_score #(prompt_score - abstract_score)
 
 				latents = self.scheduler.step(noise_pred, t, latents, **extra_step_kwargs).prev_sample
 				
@@ -394,48 +394,48 @@ if __name__ == "__main__":
 
 	data = load_data("data/CC-500.csv", "ours")
 
-	os.makedirs("tmp", exist_ok=True)
-	c = 0
-	for p in data[50:]:
-		prompt, nps = p
-		seed = np.random.randint(0,1000)
-		g = torch.Generator("cuda").manual_seed(seed)
-		img = model(prompt, nps, generator=g, **config["params"]).images[0]
-		img.save('tmp/tmp.png')
-		model.plot_similarities("tmp/tmp2.png")
-		del model
+	# os.makedirs("tmp", exist_ok=True)
+	# c = 0
+	# for p in data[50:]:
+	# 	prompt, nps = p
+	# 	seed = np.random.randint(0,1000)
+	# 	g = torch.Generator("cuda").manual_seed(seed)
+	# 	img = model(prompt, nps, generator=g, **config["params"]).images[0]
+	# 	img.save('tmp/tmp.png')
+	# 	model.plot_similarities("tmp/tmp2.png")
+	# 	del model
 
-		model = StableDiffusionPipeline.from_pretrained(config["version"]).to("cuda")
-		g = torch.Generator("cuda").manual_seed(seed)
-		img = model(prompt=prompt, generator=g).images[0]
-		img.save('tmp/tmp0.png')
-		img0 = np.array(Image.open('tmp/tmp0.png'))
+	# 	model = StableDiffusionPipeline.from_pretrained(config["version"]).to("cuda")
+	# 	g = torch.Generator("cuda").manual_seed(seed)
+	# 	img = model(prompt=prompt, generator=g).images[0]
+	# 	img.save('tmp/tmp0.png')
+	# 	img0 = np.array(Image.open('tmp/tmp0.png'))
 
-		img = np.array(Image.open('tmp/tmp.png'))#.transpose(2,1,0)
-		graph = Image.open('tmp/tmp2.png')
-		graph = np.array(graph.resize((512,512)))[:,:,:3]#.transpose(2,1,0)[:3,:,:]
-		# print(img.shape, graph.shape)
-		Image.fromarray(np.hstack([img0,img, graph])).save(f'tmp/{seed}_{prompt}.png')
-		os.remove('tmp/tmp0.png')
-		os.remove('tmp/tmp.png')
-		os.remove('tmp/tmp2.png')
-		c+=1
-		if c == 5:
-			break
+	# 	img = np.array(Image.open('tmp/tmp.png'))#.transpose(2,1,0)
+	# 	graph = Image.open('tmp/tmp2.png')
+	# 	graph = np.array(graph.resize((512,512)))[:,:,:3]#.transpose(2,1,0)[:3,:,:]
+	# 	# print(img.shape, graph.shape)
+	# 	Image.fromarray(np.hstack([img0,img, graph])).save(f'tmp/{seed}_{prompt}.png')
+	# 	os.remove('tmp/tmp0.png')
+	# 	os.remove('tmp/tmp.png')
+	# 	os.remove('tmp/tmp2.png')
+	# 	c+=1
+	# 	if c == 5:
+	# 		break
 
 	# prompt = "a brown bench and a green clock"
 	# noun_phrases = ["a brown bench", "a green clock"]
-	# # prompt = "a pink banana and a green cake"
-	# # noun_phrases = ["a pink banana", "a green cake"]
+	prompt = "a red bench and a green car"
+	noun_phrases = ["a red bench", "a green car"]
 
-	# seed = np.random.randint(0, 1000)
-	# seed = 153# 779 #464
-	# g = torch.Generator("cuda").manual_seed(seed)
+	seed = np.random.randint(0, 1000)
+	seed = 464# 779 #464
+	g = torch.Generator("cuda").manual_seed(seed)
 
 	# config["params"]["num_inference_steps"] = 25
-	# img = model(prompt, noun_phrases, generator=g, **config["params"]).images[0]
-	# img.save('tmp.png')
-	# model.plot_similarities("tmp3.png")
+	img = model(prompt, noun_phrases, generator=g, **config["params"]).images[0]
+	img.save('tmp.png')
+	model.plot_similarities("tmp3.png")
 	# visualize_cross_attention_map(attention_store, 
 	# 	img, 
 	# 	model.tokens, 
