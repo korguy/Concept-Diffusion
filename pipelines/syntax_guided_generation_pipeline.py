@@ -23,7 +23,7 @@ from diffusers.utils import (
     logging,
     replace_example_docstring,
 )
-from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer
+from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer, CLIPVisionModelWithProjection
 
 try:
     from utils.syngen_util import get_attention_map_index_to_wordpiece, split_indices, calculate_positive_loss, calculate_negative_loss, get_indices, start_token, end_token, align_wordpieces_indices, extract_attribution_indices, extract_attribution_indices_with_verbs, extract_attribution_indices_with_verb_root, extract_entities_only
@@ -43,11 +43,12 @@ class SynGenDiffusionPipeline(StableDiffusionPipeline):
                  scheduler: KarrasDiffusionSchedulers,
                  safety_checker: StableDiffusionSafetyChecker,
                  feature_extractor: CLIPImageProcessor,
+                 image_encoder: CLIPVisionModelWithProjection = None, # Needed for newer diffusers; does nothing
                  requires_safety_checker: bool = True,
                  include_entities: bool = False,
                  ):
         super().__init__(vae, text_encoder, tokenizer, unet, scheduler, safety_checker, feature_extractor,
-                         requires_safety_checker)
+                         requires_safety_checker=requires_safety_checker)
 
         self.parser = spacy.load("en_core_web_trf")
         self.subtrees_indices = None
