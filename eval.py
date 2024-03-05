@@ -16,7 +16,7 @@ ap = argparse.ArgumentParser(
         description="Run this script per dataset.")
 ap.add_argument('--config', help="May be a single file, e.g., ./configs/exp/example.yaml, "
         "or a directory in which case all .yaml files within it (recursive) will be evaluated.")
-ap.add_argument('--methods', '-m', nargs='+',
+ap.add_argument('--methods', '-m', nargs='*',
         choices=['fid', 'blip-vqa', 'clipscore', 'unidet'])
 ap.add_argument('--debug', action='store_true')
 ap.add_argument('--run_dir')
@@ -34,8 +34,6 @@ t2i_compbench_pyexe = args.t2i_compbench_pyexe
 if not t2i_compbench_pyexe:
     t2i_compbench_pyexe = osp.join(t2i_compbench_dir, ".venv/bin/python")
 
-methods = args.methods
-
 # Collect configs
 configs = []
 if osp.isfile(args.config):
@@ -49,19 +47,27 @@ else:
     print("Invalid config: '{}'".format(args.config))
 
 print("Collected {} configs: {}".format(len(configs), configs))
-print("Evalating on {} metrics: {}".format(methods, len(methods)))
+if args.methods:
+    print("Evalating on {} metrics: {}".format(args.methods, len(args.methods)))
+else:
+    print("Evaluation methods not supplied in arguments; will use `evaluation_metrics` in configs.")
 
 # Start Evaluation
-for imeth, meth in enumerate(methods):
-    print("Method [{}/{}]: {}".format(imeth+1, len(methods), meth))
-    for ic, config_fp in enumerate(configs):
-        print("\tConfig [{}/{}]: '{}'".format(ic+1, len(configs), config_fp))
-        with open(config_fp) as f:
-            config = yaml.safe_load(f)
-        dataset = config['dataset']
-        baselines = config['baselines']
-        for ibl, baseline in enumerate(baselines):
-            print("\t\tBaseline [{}/{}]: '{}'\n".format(ibl+1, len(baselines), baseline))
+for ic, config_fp in enumerate(configs):
+    print("Config [{}/{}]: '{}'".format(ic+1, len(configs), config_fp))
+    with open(config_fp) as f:
+        config = yaml.safe_load(f)
+    dataset = config['dataset']
+    baselines = config['baselines']
+    if args.methods:
+        methods = args.methods
+    else:
+        methods = config['evaluation_metrics']
+
+    for ibl, baseline in enumerate(baselines):
+        print("\tBaseline [{}/{}]: '{}'\n".format(ibl+1, len(baselines), baseline))
+        for imeth, meth in enumerate(methods):
+            print("\t\tMethod [{}/{}]: {}".format(imeth+1, len(methods), meth))
             with open(baseline) as f:
                 bl_config = yaml.safe_load(f)
             meth_init_d = {
